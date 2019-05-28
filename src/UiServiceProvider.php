@@ -38,6 +38,7 @@ class UiServiceProvider extends ServiceProvider
         }
 
         $this->commands([
+            AuthCommand::class,
             PresetCommand::class,
         ]);
     }
