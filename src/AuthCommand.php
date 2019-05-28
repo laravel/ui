@@ -135,7 +135,7 @@ class AuthCommand extends Command
     }
 
     /**
-     * Get full view path relative to the app's configured view path.
+     * Get full view path relative to the application's configured view path.
      *
      * @param  string  $path
      * @return string
