@@ -53,7 +53,7 @@ class AuthCommand extends Command
             throw new InvalidArgumentException('Invalid preset.');
         }
 
-        $this->createDirectories();
+        $this->ensureDirectoriesExist();
 
         $this->exportViews();
 
@@ -69,7 +69,7 @@ class AuthCommand extends Command
      *
      * @return void
      */
-    protected function createDirectories()
+    protected function ensureDirectoriesExist()
     {
         if (! is_dir($directory = $this->getViewPath('layouts'))) {
             mkdir($directory, 0755, true);
