@@ -95,7 +95,7 @@ class AuthCommand extends Command
             }
 
             copy(
-                __DIR__.'/'.$this->argument('type').'-stubs/make/views/'.$key,
+                __DIR__.'/Auth/'.$this->argument('type').'-stubs/'.$key,
                 $view
             );
         }
@@ -115,7 +115,7 @@ class AuthCommand extends Command
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__.'/stubs/make/routes.stub'),
+            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
             FILE_APPEND
         );
     }
@@ -130,7 +130,7 @@ class AuthCommand extends Command
         return str_replace(
             '{{namespace}}',
             $this->getAppNamespace(),
-            file_get_contents(__DIR__.'/stubs/make/controllers/HomeController.stub')
+            file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
         );
     }
 
