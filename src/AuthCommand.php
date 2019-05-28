@@ -121,7 +121,7 @@ class AuthCommand extends Command
     }
 
     /**
-     * Compiles the HomeController stub.
+     * Compiles the "HomeController" stub.
      *
      * @return string
      */
