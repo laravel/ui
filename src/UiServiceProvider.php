@@ -3,8 +3,9 @@
 namespace Laravel\Ui;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class UiServiceProvider extends ServiceProvider
+class UiServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register the package services.
@@ -41,5 +42,15 @@ class UiServiceProvider extends ServiceProvider
             AuthCommand::class,
             PresetCommand::class,
         ]);
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
     }
 }
