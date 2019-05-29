@@ -14,6 +14,7 @@ class UiCommand extends Command
      */
     protected $signature = 'ui
                             { type : The preset type (bootstrap, vue, react) }
+                            { --auth : Install authentication UI scaffolding }
                             { --option=* : Pass an option to the preset command }';
 
     /**
@@ -40,7 +41,11 @@ class UiCommand extends Command
             throw new InvalidArgumentException('Invalid preset.');
         }
 
-        return $this->{$this->argument('type')}();
+        $this->{$this->argument('type')}();
+
+        if ($this->option('auth')) {
+            $this->call('ui:auth', ['type' => $this->argument('type')]);
+        }
     }
 
     /**
