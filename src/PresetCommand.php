@@ -63,6 +63,7 @@ class PresetCommand extends Command
      */
     protected function vue()
     {
+        Presets\Bootstrap::install();
         Presets\Vue::install();
 
         $this->info('Vue scaffolding installed successfully.');
@@ -76,6 +77,7 @@ class PresetCommand extends Command
      */
     protected function react()
     {
+        Presets\Bootstrap::install();
         Presets\React::install();
 
         $this->info('React scaffolding installed successfully.');
