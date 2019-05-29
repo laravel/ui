@@ -44,7 +44,9 @@ class UiCommand extends Command
         $this->{$this->argument('type')}();
 
         if ($this->option('auth')) {
-            $this->call('ui:auth', ['type' => $this->argument('type')]);
+            $this->call('ui:auth', [
+                'type' => $this->argument('type')
+            ]);
         }
     }
 
