@@ -51,6 +51,9 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            AuthCommand::class,
+            PresetCommand::class,
+        ];
     }
 }
