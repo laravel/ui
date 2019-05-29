@@ -5,14 +5,14 @@ namespace Laravel\Ui;
 use InvalidArgumentException;
 use Illuminate\Console\Command;
 
-class PresetCommand extends Command
+class UiCommand extends Command
 {
     /**
      * The console command signature.
      *
      * @var string
      */
-    protected $signature = 'ui:preset
+    protected $signature = 'ui
                             { type : The preset type (bootstrap, vue, react) }
                             { --option=* : Pass an option to the preset command }';
 

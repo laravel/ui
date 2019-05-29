@@ -40,7 +40,7 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
 
         $this->commands([
             AuthCommand::class,
-            PresetCommand::class,
+            UiCommand::class,
         ]);
     }
 
@@ -53,7 +53,7 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         return [
             AuthCommand::class,
-            PresetCommand::class,
+            UiCommand::class,
         ];
     }
 }
