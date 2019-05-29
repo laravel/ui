@@ -16,7 +16,7 @@ class AuthCommand extends Command
      * @var string
      */
     protected $signature = 'ui:auth
-                    { type : The preset type (bootstrap) }
+                    { type=bootstrap : The preset type (bootstrap) }
                     {--views : Only scaffold the authentication views}
                     {--force : Overwrite existing views by default}';
 
