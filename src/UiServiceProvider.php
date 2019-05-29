@@ -42,5 +42,4 @@ class UiServiceProvider extends ServiceProvider
             PresetCommand::class,
         ]);
     }
-
 }
