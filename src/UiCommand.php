@@ -13,9 +13,9 @@ class UiCommand extends Command
      * @var string
      */
     protected $signature = 'ui
-                            { type : The preset type (bootstrap, vue, react) }
-                            { --auth : Install authentication UI scaffolding }
-                            { --option=* : Pass an option to the preset command }';
+                    { type : The preset type (bootstrap, vue, react) }
+                    { --auth : Install authentication UI scaffolding }
+                    { --option=* : Pass an option to the preset command }';
 
     /**
      * The console command description.
