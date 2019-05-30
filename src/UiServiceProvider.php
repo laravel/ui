@@ -14,34 +14,12 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register()
     {
-        $this->registerCommands();
-    }
-
-    /**
-     * Boot the package services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
-     * Register the console commands.
-     *
-     * @return void
-     */
-    protected function registerCommands()
-    {
-        if (! $this->app->runningInConsole()) {
-            return;
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                AuthCommand::class,
+                UiCommand::class,
+            ]);
         }
-
-        $this->commands([
-            AuthCommand::class,
-            UiCommand::class,
-        ]);
     }
 
     /**
