@@ -67,7 +67,7 @@ class React extends Preset
             resource_path('js/components/ExampleComponent.vue')
         );
 
-        $stubFile = Tailwind::installed() ? 'Example.tailwind.js' : 'ExampleComponent.js';
+        $stubFile = Tailwind::installed() ? 'Example.tailwind.js' : 'Example.js';
         
         copy(
             __DIR__.'/react-stubs/'.$stubFile,

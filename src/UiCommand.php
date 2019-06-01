@@ -59,6 +59,8 @@ class UiCommand extends Command
     {
         Presets\Bootstrap::install();
 
+        static::reinstallJsFramework();
+
         $this->info('Bootstrap scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
@@ -71,6 +73,8 @@ class UiCommand extends Command
     protected function tailwind()
     {
         Presets\Tailwind::install();
+
+        static::reinstallJsFramework();
 
         $this->info('Tailwind scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
@@ -108,5 +112,19 @@ class UiCommand extends Command
 
         $this->info('React scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+    }
+
+    /**
+     * Reinstalls Vue or React if installed.
+     *
+     * @return void
+     */
+    protected function reinstallJsFramework()
+    {
+        if (Presets\React::installed()) {
+            Presets\React::install();
+        } elseif (Presets\Vue::installed()) {
+            Presets\Vue::install();
+        }
     }
 }
