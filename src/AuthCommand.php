@@ -16,7 +16,7 @@ class AuthCommand extends Command
      * @var string
      */
     protected $signature = 'ui:auth
-                    { type=bootstrap : The preset type (bootstrap) }
+                    { type=bootstrap : The preset type (bootstrap, tailwind) }
                     {--views : Only scaffold the authentication views}
                     {--force : Overwrite existing views by default}';
 
@@ -49,7 +49,7 @@ class AuthCommand extends Command
      */
     public function handle()
     {
-        if (! in_array($this->argument('type'), ['bootstrap'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'tailwind'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 

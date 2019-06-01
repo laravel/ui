@@ -2,16 +2,17 @@
 
 namespace Laravel\Ui\Presets;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 
-class Bootstrap extends Preset
+class Tailwind extends Preset
 {
     /**
      * NPM Package key.
      *
      * @var string
      */
-    protected static $packageKey = 'bootstrap';
+    protected static $packageKey = 'tailwindcss';
 
     /**
      * Install the preset.
@@ -23,6 +24,7 @@ class Bootstrap extends Preset
         static::updatePackages();
         static::updateSass();
         static::updateBootstrapping();
+        static::removeBootstrapAssets();
         static::updateWebpackConfiguration();
         static::removeNodeModules();
     }
@@ -36,11 +38,11 @@ class Bootstrap extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'bootstrap' => '^4.0.0',
-            'jquery' => '^3.2',
-            'popper.js' => '^1.12',
+            'tailwindcss' => '^1.0.2',
         ] + Arr::except($packages, [
-            'tailwindcss',
+            'bootstrap',
+            'jquery',
+            'popper.js',
         ]);
     }
 
@@ -53,7 +55,7 @@ class Bootstrap extends Preset
     {
         $stubsFolder = React::installed() ? 'react-stubs' : 'vue-stubs';
 
-        copy(__DIR__.'/'.$stubsFolder.'/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/'.$stubsFolder.'/tailwind.webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -63,8 +65,7 @@ class Bootstrap extends Preset
      */
     protected static function updateSass()
     {
-        copy(__DIR__.'/bootstrap-stubs/_variables.scss', resource_path('sass/_variables.scss'));
-        copy(__DIR__.'/bootstrap-stubs/app.scss', resource_path('sass/app.scss'));
+        copy(__DIR__.'/tailwind-stubs/app.scss', resource_path('sass/app.scss'));
     }
 
     /**
@@ -74,6 +75,18 @@ class Bootstrap extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/bootstrap-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__.'/tailwind-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+    }
+
+    /**
+     * Remove Bootstrap preset assets if present.
+     *
+     * @return void
+     */
+    protected static function removeBootstrapAssets()
+    {
+        (new Filesystem)->delete(
+            resource_path('sass/_variables.scss')
+        );
     }
 }

@@ -8,6 +8,13 @@ use Illuminate\Filesystem\Filesystem;
 class Vue extends Preset
 {
     /**
+     * NPM Package key.
+     *
+     * @var string
+     */
+    protected static $packageKey = 'vue';
+
+    /**
      * Install the preset.
      *
      * @return void
@@ -50,7 +57,9 @@ class Vue extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/vue-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        $stubFile = Tailwind::installed() ? 'tailwind.webpack.mix.js' : 'webpack.mix.js';
+
+        copy(__DIR__.'/vue-stubs/'.$stubFile, base_path('webpack.mix.js'));
     }
 
     /**
@@ -64,8 +73,10 @@ class Vue extends Preset
             resource_path('js/components/Example.js')
         );
 
+        $stubFile = Tailwind::installed() ? 'ExampleComponent.tailwind.vue' : 'ExampleComponent.vue';
+
         copy(
-            __DIR__.'/vue-stubs/ExampleComponent.vue',
+            __DIR__.'/vue-stubs/'.$stubFile,
             resource_path('js/components/ExampleComponent.vue')
         );
     }

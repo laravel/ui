@@ -1,0 +1,15 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Tailwind
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+// App
+html,
+body {
+  @apply h-full;
+}

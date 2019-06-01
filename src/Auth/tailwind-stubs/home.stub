@@ -1,0 +1,17 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="max-w-2xl rounded bg-white border border-gray-400 mx-auto overflow-hidden">
+    <div class="px-5 py-4 bg-gray-200 border-b border-gray-400 text-sm">Dashboard</div>
+
+    <div class="px-5 py-5 text-sm">
+        @if (session('status'))
+            <div class="px-4 py-3 bg-green-100 border border-green-300 rounded mb-4 text-green-800" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
+                    
+        <div>You are logged in!</div>
+    </div>
+</div>
+@endsection

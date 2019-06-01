@@ -7,6 +7,31 @@ use Illuminate\Filesystem\Filesystem;
 class Preset
 {
     /**
+     * NPM Package key.
+     *
+     * @var string
+     */
+    protected static $packageKey;
+
+    /**
+     * Check whether the preset is installed.
+     *
+     * @return bool
+     */
+    public static function installed($dev = true)
+    {
+        if (! file_exists(base_path('package.json')) || ! isset(static::$packageKey)) {
+            return false;
+        }
+
+        $configurationKey = $dev ? 'devDependencies' : 'dependencies';
+
+        $packages = json_decode(file_get_contents(base_path('package.json')), true);
+
+        return array_key_exists(static::$packageKey, $packages[$configurationKey]);
+    }
+
+    /**
      * Ensure the component directories we need exist.
      *
      * @return void

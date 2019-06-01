@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="h-full">
+        <nav class="bg-white border-b border-gray-300 px-6 lg:px-0 py-4">
+            <div class="container mx-auto flex items-center justify-between flex-wrap">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <a href="{{ url('/') }}" class="text-lg text-black">{{ config('app.name', 'Laravel') }}</a>
+                </div>
+                <div class="flex-grow flex items-center justify-end">
+                    <ul class="flex">
+                        @guest
+                            <li>
+                                <a class="inline-block text-gray-600 hover:text-gray-700 mr-6 text-sm" href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="inline-block text-gray-600 hover:text-gray-700 text-sm" href="{{ route('register') }}">
+                                    {{ __('Register') }}
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <span class="inline-block text-gray-900 mr-6 text-sm">{{ Auth::user()->name }}<span>
+                            </li>
+                            <li>
+                                <a class="inline-block text-gray-600 hover:text-gray-700 text-sm" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container mx-auto px-6 md:px-0 py-10">
+            @yield('content')
+        </main>
+    </div>
+</body>
+</html>

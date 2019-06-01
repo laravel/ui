@@ -8,6 +8,13 @@ use Illuminate\Filesystem\Filesystem;
 class React extends Preset
 {
     /**
+     * NPM Package key.
+     *
+     * @var string
+     */
+    protected static $packageKey = 'react';
+
+    /**
      * Install the preset.
      *
      * @return void
@@ -44,7 +51,9 @@ class React extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/react-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        $stubFile = Tailwind::installed() ? 'tailwind.webpack.mix.js' : 'webpack.mix.js';
+
+        copy(__DIR__.'/react-stubs/'.$stubFile, base_path('webpack.mix.js'));
     }
 
     /**
@@ -58,8 +67,10 @@ class React extends Preset
             resource_path('js/components/ExampleComponent.vue')
         );
 
+        $stubFile = Tailwind::installed() ? 'Example.tailwind.js' : 'ExampleComponent.js';
+        
         copy(
-            __DIR__.'/react-stubs/Example.js',
+            __DIR__.'/react-stubs/'.$stubFile,
             resource_path('js/components/Example.js')
         );
     }

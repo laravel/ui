@@ -13,7 +13,7 @@ class UiCommand extends Command
      * @var string
      */
     protected $signature = 'ui
-                    { type : The preset type (bootstrap, vue, react) }
+                    { type : The preset type (bootstrap, tailwind, vue, react) }
                     { --auth : Install authentication UI scaffolding }
                     { --option=* : Pass an option to the preset command }';
 
@@ -37,14 +37,16 @@ class UiCommand extends Command
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap', 'vue', 'react'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'tailwind', 'vue', 'react'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 
         $this->{$this->argument('type')}();
 
         if ($this->option('auth')) {
-            $this->call('ui:auth');
+            $this->call('ui:auth', [
+                'type' => Presets\Tailwind::installed() ? 'tailwind' : 'bootstrap',
+            ]);
         }
     }
 
@@ -62,13 +64,29 @@ class UiCommand extends Command
     }
 
     /**
+     * Install the "tailwind" preset.
+     *
+     * @return void
+     */
+    protected function tailwind()
+    {
+        Presets\Tailwind::install();
+
+        $this->info('Tailwind scaffolding installed successfully.');
+        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+    }
+
+    /**
      * Install the "vue" preset.
      *
      * @return void
      */
     protected function vue()
     {
-        Presets\Bootstrap::install();
+        if (! Presets\Tailwind::installed()) {
+            Presets\Bootstrap::install();
+        }
+
         Presets\Vue::install();
 
         $this->info('Vue scaffolding installed successfully.');
@@ -82,7 +100,10 @@ class UiCommand extends Command
      */
     protected function react()
     {
-        Presets\Bootstrap::install();
+        if (! Presets\Tailwind::installed()) {
+            Presets\Bootstrap::install();
+        }
+
         Presets\React::install();
 
         $this->info('React scaffolding installed successfully.');
