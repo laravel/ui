@@ -59,7 +59,7 @@ class UiCommand extends Command
     {
         Presets\Bootstrap::install();
 
-        static::reinstallJsFramework();
+        $this->reinstallJsFramework();
 
         $this->info('Bootstrap scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
@@ -74,7 +74,7 @@ class UiCommand extends Command
     {
         Presets\Tailwind::install();
 
-        static::reinstallJsFramework();
+        $this->reinstallJsFramework();
 
         $this->info('Tailwind scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
