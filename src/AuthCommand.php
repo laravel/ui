@@ -4,12 +4,9 @@ namespace Laravel\Ui;
 
 use InvalidArgumentException;
 use Illuminate\Console\Command;
-use Illuminate\Console\DetectsApplicationNamespace;
 
 class AuthCommand extends Command
 {
-    use DetectsApplicationNamespace;
-
     /**
      * The name and signature of the console command.
      *
@@ -129,7 +126,7 @@ class AuthCommand extends Command
     {
         return str_replace(
             '{{namespace}}',
-            $this->getAppNamespace(),
+            $this->laravel->getNamespace(),
             file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
         );
     }
