@@ -4,7 +4,7 @@
 
 ## Supported Versions
 
-Only the latest version receives security fixes.
+Only the latest major version receives security fixes.
 
 ## Reporting a Vulnerability
 
