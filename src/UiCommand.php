@@ -58,7 +58,7 @@ class UiCommand extends Command
         Presets\Bootstrap::install();
 
         $this->info('Bootstrap scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+        $this->comment('Please run "yarn && yarn run dev" to compile your fresh scaffolding.');
     }
 
     /**
@@ -72,7 +72,7 @@ class UiCommand extends Command
         Presets\Vue::install();
 
         $this->info('Vue scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+        $this->comment('Please run "yarn && yarn run dev" to compile your fresh scaffolding.');
     }
 
     /**
@@ -86,6 +86,6 @@ class UiCommand extends Command
         Presets\React::install();
 
         $this->info('React scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+        $this->comment('Please run "yarn && yarn run dev" to compile your fresh scaffolding.');
     }
 }
