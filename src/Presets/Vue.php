@@ -31,7 +31,7 @@ class Vue extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'resolve-url-loader' => '2.3.1',
+            'resolve-url-loader' => '^2.3.1',
             'sass' => '^1.20.1',
             'sass-loader' => '7.*',
             'vue' => '^2.5.17',
