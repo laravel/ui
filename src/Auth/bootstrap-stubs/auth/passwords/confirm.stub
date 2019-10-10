@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
-                    {{ __('We won\'t ask for your password again for a few hours.') }}
+                    {{ __('We won\'t ask for your password again for a certain amount of time.') }}
 
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
