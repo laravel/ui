@@ -4,6 +4,7 @@ namespace Laravel\Ui;
 
 use InvalidArgumentException;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class AuthCommand extends Command
 {
@@ -56,7 +57,6 @@ class AuthCommand extends Command
         }
 
         $this->ensureDirectoriesExist();
-
         $this->exportViews();
 
         if (! $this->option('views')) {
@@ -110,6 +110,15 @@ class AuthCommand extends Command
      */
     protected function exportBackend()
     {
+        if (! is_dir($directory = app_path('Http/Controllers/Auth'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        (new Filesystem)->copyDirectory(
+            __DIR__.'/../stubs/Auth',
+            app_path('Http/Controllers/Auth')
+        );
+
         file_put_contents(
             app_path('Http/Controllers/HomeController.php'),
             $this->compileControllerStub()

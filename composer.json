@@ -21,7 +21,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Ui\\": "src/"
+            "Laravel\\Ui\\": "src/",
+            "Illuminate\\Foundation\\Auth\\": "auth-backend/"
         }
     },
     "autoload-dev": {
