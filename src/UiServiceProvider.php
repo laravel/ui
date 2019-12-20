@@ -3,6 +3,7 @@
 namespace Laravel\Ui;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Ui\ControllersCommand;
 
@@ -22,6 +23,16 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
                 UiCommand::class,
             ]);
         }
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Route::mixin(new AuthRouteMethods);
     }
 
     /**
