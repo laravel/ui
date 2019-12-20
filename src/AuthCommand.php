@@ -2,9 +2,9 @@
 
 namespace Laravel\Ui;
 
-use InvalidArgumentException;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use InvalidArgumentException;
 
 class AuthCommand extends Command
 {
