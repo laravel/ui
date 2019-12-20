@@ -110,14 +110,7 @@ class AuthCommand extends Command
      */
     protected function exportBackend()
     {
-        if (! is_dir($directory = app_path('Http/Controllers/Auth'))) {
-            mkdir($directory, 0755, true);
-        }
-
-        (new Filesystem)->copyDirectory(
-            __DIR__.'/../stubs/Auth',
-            app_path('Http/Controllers/Auth')
-        );
+        $this->callSilent('ui:controllers');
 
         file_put_contents(
             app_path('Http/Controllers/HomeController.php'),
