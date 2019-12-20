@@ -4,6 +4,7 @@ namespace Laravel\Ui;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Ui\ControllersCommand;
 
 class UiServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -17,6 +18,7 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AuthCommand::class,
+                ControllersCommand::class,
                 UiCommand::class,
             ]);
         }
@@ -31,6 +33,7 @@ class UiServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         return [
             AuthCommand::class,
+            ControllersCommand::class,
             UiCommand::class,
         ];
     }
