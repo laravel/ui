@@ -52,9 +52,24 @@ trait VerifiesEmails
             event(new Verified($request->user()));
         }
 
+        if ($response = $this->verified($request)) {
+            return $response;
+        }
+
         return $request->wantsJson()
                     ? new Response('', 204)
                     : redirect($this->redirectPath())->with('verified', true);
+    }
+
+    /**
+     * The user has been verified.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    protected function verified(Request $request)
+    {
+        //
     }
 
     /**
