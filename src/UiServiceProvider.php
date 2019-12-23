@@ -2,8 +2,8 @@
 
 namespace Laravel\Ui;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 
 class UiServiceProvider extends ServiceProvider implements DeferrableProvider
 {
