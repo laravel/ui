@@ -3,11 +3,13 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 trait ResetsPasswords
 {
@@ -134,6 +136,10 @@ trait ResetsPasswords
      */
     protected function sendResetResponse(Request $request, $response)
     {
+        if ($request->wantsJson()) {
+            return new JsonResponse(['message' => trans($response)], 200);
+        }
+
         return redirect($this->redirectPath())
                             ->with('status', trans($response));
     }
@@ -147,6 +153,12 @@ trait ResetsPasswords
      */
     protected function sendResetFailedResponse(Request $request, $response)
     {
+        if ($request->wantsJson()) {
+            throw ValidationException::withMessages([
+                'email' => [trans($response)],
+            ]);
+        }
+
         return redirect()->back()
                     ->withInput($request->only('email'))
                     ->withErrors(['email' => trans($response)]);
