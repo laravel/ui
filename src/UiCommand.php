@@ -15,6 +15,7 @@ class UiCommand extends Command
     protected $signature = 'ui
                     { type : The preset type (bootstrap, vue, react) }
                     { --auth : Install authentication UI scaffolding }
+                    { --no-bootstrap : Install preset without bootstrap }
                     { --option=* : Pass an option to the preset command }';
 
     /**
@@ -68,7 +69,9 @@ class UiCommand extends Command
      */
     protected function vue()
     {
-        Presets\Bootstrap::install();
+        if (! $this->hasOption('--no-bootstrap'))
+            Presets\Bootstrap::install();
+
         Presets\Vue::install();
 
         $this->info('Vue scaffolding installed successfully.');
@@ -82,7 +85,9 @@ class UiCommand extends Command
      */
     protected function react()
     {
-        Presets\Bootstrap::install();
+        if (! $this->hasOption('--no-bootstrap'))
+            Presets\Bootstrap::install();
+
         Presets\React::install();
 
         $this->info('React scaffolding installed successfully.');
