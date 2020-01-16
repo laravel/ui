@@ -45,7 +45,7 @@ trait VerifiesEmails
         if ($request->user()->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
-                        : redirect($this->redirectPath());
+                        : redirect()->intended($this->redirectPath());
         }
 
         if ($request->user()->markEmailAsVerified()) {
@@ -58,7 +58,7 @@ trait VerifiesEmails
 
         return $request->wantsJson()
                     ? new Response('', 204)
-                    : redirect($this->redirectPath())->with('verified', true);
+                    : redirect()->intended($this->redirectPath())->with('verified', true);
     }
 
     /**
