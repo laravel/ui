@@ -26,9 +26,9 @@ class Bootstrap extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'bootstrap' => '^4.0.0',
-            'jquery' => '^3.2',
-            'popper.js' => '^1.12',
+            'bootstrap' => '^4.4.1',
+            'jquery' => '^3.4.1',
+            'popper.js' => '^1.16.2',
         ] + $packages;
     }
 
