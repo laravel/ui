@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v1.1.2...master)
+## [Unreleased](https://github.com/laravel/ui/compare/v1.2.0...master)
+
+
+## [v1.2.0 (2019-10-20)](https://github.com/laravel/ui/compare/v1.1.2...v1.2.0)
+
+### Changed
+- Use `sass-loader` v8 for Vue preset ([bb64fca](https://github.com/laravel/ui/commit/bb64fca681566ca94457d490a00f899516e75664))
 
 
 ## [v1.1.2 (2019-10-20)](https://github.com/laravel/ui/compare/v1.1.1...v1.1.2)
