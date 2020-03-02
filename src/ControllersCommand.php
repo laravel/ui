@@ -4,6 +4,8 @@ namespace Laravel\Ui;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\SplFileInfo;
 
 class ControllersCommand extends Command
 {
@@ -32,10 +34,15 @@ class ControllersCommand extends Command
             mkdir($directory, 0755, true);
         }
 
-        (new Filesystem)->copyDirectory(
-            __DIR__.'/../stubs/Auth',
-            app_path('Http/Controllers/Auth')
-        );
+        $filesystem = new Filesystem;
+
+        collect($filesystem->allFiles(__DIR__.'/../stubs/Auth'))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Auth/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
 
         $this->info('Authentication scaffolding generated successfully.');
     }
