@@ -3,7 +3,7 @@
 ## [Unreleased](https://github.com/laravel/ui/compare/v1.2.0...2.x)
 
 
-## [v1.2.0 (2019-10-20)](https://github.com/laravel/ui/compare/v1.1.2...v1.2.0)
+## [v1.2.0 (2020-02-18)](https://github.com/laravel/ui/compare/v1.1.2...v1.2.0)
 
 ### Changed
 - Use `sass-loader` v8 for Vue preset ([bb64fca](https://github.com/laravel/ui/commit/bb64fca681566ca94457d490a00f899516e75664))
