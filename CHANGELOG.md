@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/laravel/ui/compare/v1.2.0...2.x)
 
+### Changed
+- The UI package now contains all auth scaffolding from the laravel skeleton
+
 
 ## [v1.2.0 (2020-02-18)](https://github.com/laravel/ui/compare/v1.1.2...v1.2.0)
 
