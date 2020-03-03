@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.0.0...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.0.1...2.x)
+
+
+## [v2.0.1 (2020-03-03)](https://github.com/laravel/ui/compare/v1.2.0...v2.0.0)
+
+### Fixed
+- Make `auth` options empty by default ([47a0a1d](https://github.com/laravel/ui/commit/47a0a1dac76f5e73803c86e1f38b2c7e0ae7fa83))
 
 
 ## [v2.0.0 (2020-03-03)](https://github.com/laravel/ui/compare/v1.2.0...v2.0.0)
