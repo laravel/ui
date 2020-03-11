@@ -15,13 +15,13 @@ class AuthRouteMethods
         return function ($options = []) {
             // Authentication Routes...
             $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-            $this->post('login', 'Auth\LoginController@login');
+            $this->post('login', 'Auth\LoginController@login')->name('login.action');
             $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
             // Registration Routes...
             if ($options['register'] ?? true) {
                 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-                $this->post('register', 'Auth\RegisterController@register');
+                $this->post('register', 'Auth\RegisterController@register')->name('register.action');
             }
 
             // Password Reset Routes...
@@ -66,7 +66,7 @@ class AuthRouteMethods
     {
         return function () {
             $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-            $this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
+            $this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm')->name('password.confirm.action');
         };
     }
 
