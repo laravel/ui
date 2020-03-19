@@ -112,7 +112,7 @@ trait AuthenticatesUsers
         }
 
         return $request->wantsJson()
-                    ? new Response('', 204)
+                    ? new Response(csrf_token(), 200)
                     : redirect()->intended($this->redirectPath());
     }
 
