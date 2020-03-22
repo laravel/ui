@@ -124,9 +124,11 @@ class AuthCommand extends Command
             FILE_APPEND
         );
 
+        $migrationPrefix = date('Y_m_d_His');
+
         copy(
-            __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
-            base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
+            __DIR__.'/../stubs/migrations/create_password_resets_table.stub',
+            base_path("database/migrations/{$migrationPrefix}_create_password_resets_table.php")
         );
     }
 
