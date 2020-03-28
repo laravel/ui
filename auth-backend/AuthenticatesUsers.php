@@ -112,7 +112,7 @@ trait AuthenticatesUsers
         }
 
         return $request->wantsJson()
-                    ? new Response('', 204)
+                    ? $this->loginJsonResponse()
                     : redirect()->intended($this->redirectPath());
     }
 
@@ -172,7 +172,7 @@ trait AuthenticatesUsers
         }
 
         return $request->wantsJson()
-            ? new Response('', 204)
+            ? $this->logoutJsonResponse()
             : redirect('/');
     }
 
@@ -195,5 +195,35 @@ trait AuthenticatesUsers
     protected function guard()
     {
         return Auth::guard();
+    }
+
+    /**
+     * returns an empty json response
+     *
+     * @return Response
+     */
+    protected function loginJsonResponse(): Response
+    {
+        return $this->emptyResponse();
+    }
+
+    /**
+     * returns an empty json response
+     *
+     * @return Response
+     */
+    protected function logoutJsonResponse(): Response
+    {
+        return $this->emptyResponse();
+    }
+
+    /**
+     * returns an empty response
+     *
+     * @return Response
+     */
+    protected function emptyResponse(): Response
+    {
+        return new Response('', 204);
     }
 }

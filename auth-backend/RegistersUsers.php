@@ -40,7 +40,7 @@ trait RegistersUsers
         }
 
         return $request->wantsJson()
-                    ? new Response('', 201)
+                    ? $this->registerJsonResponse()
                     : redirect($this->redirectPath());
     }
 
@@ -64,5 +64,15 @@ trait RegistersUsers
     protected function registered(Request $request, $user)
     {
         //
+    }
+
+    /**
+     * returns an empty json response
+     *
+     * @return Response
+     */
+    protected function registerJsonResponse(): Response
+    {
+        return new Response('', 201);
     }
 }
