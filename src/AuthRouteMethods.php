@@ -14,13 +14,17 @@ class AuthRouteMethods
     {
         return function ($options = []) {
             // Authentication Routes...
-            $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+            if ($options['spa'] ?? false) {
+                $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+            }
             $this->post('login', 'Auth\LoginController@login');
             $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
             // Registration Routes...
             if ($options['register'] ?? true) {
-                $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+                if ($options['spa'] ?? false) {
+                    $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+                }
                 $this->post('register', 'Auth\RegisterController@register');
             }
 
@@ -50,9 +54,14 @@ class AuthRouteMethods
     public function resetPassword()
     {
         return function () {
-            $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+            if ($options['spa'] ?? false) {
+                $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+            }
             $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-            $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+            
+            if ($options['spa'] ?? false) {
+                $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+            }
             $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
         };
     }
@@ -65,7 +74,9 @@ class AuthRouteMethods
     public function confirmPassword()
     {
         return function () {
-            $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+            if ($options['spa'] ?? false) {
+                $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+            }
             $this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
         };
     }
@@ -78,8 +89,10 @@ class AuthRouteMethods
     public function emailVerification()
     {
         return function () {
-            $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-            $this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+            if ($options['spa'] ?? false) {
+                $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+                $this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+            }
             $this->post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
         };
     }
