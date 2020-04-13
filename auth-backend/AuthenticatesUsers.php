@@ -103,7 +103,8 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
+        if (!$request->is('api/*'))
+            $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
 
