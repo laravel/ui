@@ -116,7 +116,7 @@ class AuthCommand extends Command
         $controller = app_path('Http/Controllers/HomeController.php');
 
         if (file_exists($controller) && ! $this->option('force')) {
-            if ($this->confirm("The [HomeController.php] already exists. Do you want to replace it?")) {
+            if ($this->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
                 file_put_contents($controller, $this->compileControllerStub());
             }
         }
