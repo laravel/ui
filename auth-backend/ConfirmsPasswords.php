@@ -12,7 +12,7 @@ trait ConfirmsPasswords
     /**
      * Display the password confirmation view.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function showConfirmForm()
     {
