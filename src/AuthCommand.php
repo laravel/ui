@@ -119,6 +119,8 @@ class AuthCommand extends Command
             if ($this->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
                 file_put_contents($controller, $this->compileControllerStub());
             }
+        } else {
+            file_put_contents($controller, $this->compileControllerStub());
         }
 
         file_put_contents(
