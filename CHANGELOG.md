@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.0.2...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.0.3...2.x)
+
+
+## [v2.0.3 (2020-04-29)](https://github.com/laravel/ui/compare/v2.0.2...v2.0.3)
+
+### Fixed
+- Fix confirm controller overwrite ([#100](https://github.com/laravel/ui/pull/100))
 
 
 ## [v2.0.2 (2020-04-28)](https://github.com/laravel/ui/compare/v2.0.1...v2.0.2)
