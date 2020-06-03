@@ -2,6 +2,8 @@
 
 namespace Laravel\Ui\Presets;
 
+use Illuminate\Filesystem\Filesystem;
+
 class Bootstrap extends Preset
 {
     /**
@@ -15,6 +17,21 @@ class Bootstrap extends Preset
         static::updateSass();
         static::updateBootstrapping();
         static::removeNodeModules();
+    }
+
+    /**
+     * Remove "components" directory if it exists
+     *
+     * @return void
+     */
+
+    protected static function removeComponentsDirectory()
+    {
+        $filesystem = new Filesystem;
+
+        if ($filesystem->isDirectory(resource_path('js/components'))) {
+            $filesystem->deleteDirectory(resource_path('js/components'));
+        }
     }
 
     /**
