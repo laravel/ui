@@ -13,8 +13,10 @@ class Bootstrap extends Preset
      */
     public static function install()
     {
+        static::removeComponentsDirectory();
         static::updatePackages();
         static::updateSass();
+        static::updateJS();
         static::updateBootstrapping();
         static::removeNodeModules();
     }
@@ -24,7 +26,6 @@ class Bootstrap extends Preset
      *
      * @return void
      */
-
     protected static function removeComponentsDirectory()
     {
         $filesystem = new Filesystem;
