@@ -54,11 +54,24 @@ class Bootstrap extends Preset
      *
      * @return void
      */
+
     protected static function updateSass()
     {
         copy(__DIR__.'/bootstrap-stubs/_variables.scss', resource_path('sass/_variables.scss'));
         copy(__DIR__.'/bootstrap-stubs/app.scss', resource_path('sass/app.scss'));
     }
+
+    /**
+     * Update the app.js file for the application
+     *
+     * @return void
+     */
+
+	protected static function updateJS()
+    {
+        copy(__DIR__.'/bootstrap-stubs/app.js', resource_path('js/app.js'));
+    }
+
 
     /**
      * Update the bootstrapping files.
