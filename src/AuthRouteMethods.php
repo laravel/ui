@@ -8,7 +8,7 @@ class AuthRouteMethods
      * Register the typical authentication routes for an application.
      *
      * @param  array  $options
-     * @return void
+     * @return callable
      */
     public function auth()
     {
