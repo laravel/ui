@@ -19,7 +19,9 @@ trait VerifiesEmails
      */
     public function show(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
+        $user = $this->user($request);
+
+        return $user->hasVerifiedEmail()
                         ? redirect($this->redirectPath())
                         : view('auth.verify');
     }
@@ -34,22 +36,24 @@ trait VerifiesEmails
      */
     public function verify(Request $request)
     {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
+        $user = $this->user($request);
+
+        if (! hash_equals((string) $request->route('id'), (string) $user->getKey())) {
             throw new AuthorizationException;
         }
 
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
             throw new AuthorizationException;
         }
 
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($user->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
                         : redirect($this->redirectPath());
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
         }
 
         if ($response = $this->verified($request)) {
@@ -80,16 +84,29 @@ trait VerifiesEmails
      */
     public function resend(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $user = $this->user($request);
+
+        if ($user->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
                         : redirect($this->redirectPath());
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
         return $request->wantsJson()
                     ? new Response('', 202)
                     : back()->with('resent', true);
+    }
+
+    /**
+     * Get the user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }
