@@ -1,6 +1,21 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.0.2...master)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.1.0...master)
+
+
+## [v2.1.0 (2020-06-30)](https://github.com/laravel/ui/compare/v2.0.3...v2.1.0)
+
+### Added
+- Allow for optional login and logout routes ([#113](https://github.com/laravel/ui/pull/113))
+
+### Fixed
+- Missed localizable strings ([#105](https://github.com/laravel/ui/pull/105))
+
+
+## [v2.0.3 (2020-04-29)](https://github.com/laravel/ui/compare/v2.0.2...v2.0.3)
+
+### Fixed
+- Fix confirm controller overwrite ([#100](https://github.com/laravel/ui/pull/100))
 
 
 ## [v2.0.2 (2020-04-28)](https://github.com/laravel/ui/compare/v2.0.1...v2.0.2)
