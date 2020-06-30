@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.0.3...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.1.0...2.x)
+
+
+## [v2.1.0 (2020-06-30)](https://github.com/laravel/ui/compare/v2.0.3...v2.1.0)
+
+### Added
+- Allow for optional login and logout routes ([#113](https://github.com/laravel/ui/pull/113))
+
+### Fixed
+- Missed localizable strings ([#105](https://github.com/laravel/ui/pull/105))
 
 
 ## [v2.0.3 (2020-04-29)](https://github.com/laravel/ui/compare/v2.0.2...v2.0.3)
