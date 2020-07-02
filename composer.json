@@ -1,12 +1,12 @@
 {
-    "name": "laravel/ui",
+    "name": "arifhas/ui",
     "description": "Laravel UI utilities and presets.",
     "keywords": ["laravel", "ui"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Taylor Otwell",
-            "email": "taylor@laravel.com"
+            "name": "Arif Hasan",
+            "email": "arif.saiket@gmail.com"
         }
     ],
     "require": {
@@ -21,13 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Ui\\": "src/",
+            "Arifhas\\Ui\\": "src/",
             "Illuminate\\Foundation\\Auth\\": "auth-backend/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravel\\Ui\\Tests\\": "tests/"
+            "Arifhas\\Ui\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -36,7 +36,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Laravel\\Ui\\UiServiceProvider"
+                "Arifhas\\Ui\\UiServiceProvider"
             ]
         }
     },

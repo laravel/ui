@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui;
+namespace Arifhas\Ui;
 
 use Illuminate\Console\Command;
 use InvalidArgumentException;

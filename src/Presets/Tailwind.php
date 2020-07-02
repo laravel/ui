@@ -2,10 +2,7 @@
 
 namespace Arifhas\Ui\Presets;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Arr;
-
-class React extends Preset
+class Tailwind extends Preset
 {
     /**
      * Install the preset.
@@ -14,11 +11,11 @@ class React extends Preset
      */
     public static function install()
     {
-        static::ensureComponentDirectoryExists();
         static::updatePackages();
         static::updateWebpackConfiguration();
+        static::updateTailwindConfiguration();
+        static::updateSass();
         static::updateBootstrapping();
-        static::updateComponent();
         static::removeNodeModules();
     }
 
@@ -31,10 +28,8 @@ class React extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            '@babel/preset-react' => '^7.0.0',
-            'react' => '^16.2.0',
-            'react-dom' => '^16.2.0',
-        ] + Arr::except($packages, ['vue', 'vue-template-compiler']);
+            'tailwindcss' => '^1.4.6',
+        ] + $packages;
     }
 
     /**
@@ -44,24 +39,27 @@ class React extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/react-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/tailwind-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
-     * Update the example component.
+     * Update the Tailwind configuration.
      *
      * @return void
      */
-    protected static function updateComponent()
+    protected static function updateTailwindConfiguration()
     {
-        (new Filesystem)->delete(
-            resource_path('js/components/ExampleComponent.vue')
-        );
+        copy(__DIR__.'/tailwind-stubs/tailwind.config.js', base_path('tailwind.config.js'));
+    }
 
-        copy(
-            __DIR__.'/react-stubs/Example.js',
-            resource_path('js/components/Example.js')
-        );
+    /**
+     * Update the Sass files for the application.
+     *
+     * @return void
+     */
+    protected static function updateSass()
+    {
+        copy(__DIR__.'/tailwind-stubs/app.scss', resource_path('sass/app.scss'));
     }
 
     /**
@@ -71,6 +69,6 @@ class React extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/react-stubs/app.js', resource_path('js/app.js'));
+        copy(__DIR__.'/tailwind-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 }

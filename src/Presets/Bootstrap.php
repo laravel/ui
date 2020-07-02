@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Presets;
+namespace Arifhas\Ui\Presets;
 
 class Bootstrap extends Preset
 {
