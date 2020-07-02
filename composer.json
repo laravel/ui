@@ -34,6 +34,9 @@
         "sort-packages": true
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        },
         "laravel": {
             "providers": [
                 "Arifhas\\Ui\\UiServiceProvider"
