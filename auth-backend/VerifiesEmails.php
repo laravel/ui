@@ -6,20 +6,30 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 trait VerifiesEmails
 {
     use RedirectsUsers;
 
     /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
+    /**
      * Show the email verification notice.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show(Request $request)
+    public function show()
     {
-        return $request->user()->hasVerifiedEmail()
+        return $this->guard()->user()->hasVerifiedEmail()
                         ? redirect($this->redirectPath())
                         : view('auth.verify');
     }
@@ -34,22 +44,22 @@ trait VerifiesEmails
      */
     public function verify(Request $request)
     {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
+        if (! hash_equals((string) $request->route('id'), (string) $this->guard()->user()->getKey())) {
             throw new AuthorizationException;
         }
 
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        if (! hash_equals((string) $request->route('hash'), sha1($this->guard()->user()->getEmailForVerification()))) {
             throw new AuthorizationException;
         }
 
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($this->guard()->user()->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
                         : redirect($this->redirectPath());
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($this->guard()->user()->markEmailAsVerified()) {
+            event(new Verified($this->guard()->user()));
         }
 
         if ($response = $this->verified($request)) {
@@ -80,13 +90,13 @@ trait VerifiesEmails
      */
     public function resend(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($this->guard()->user()->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
                         : redirect($this->redirectPath());
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $this->guard()->user()->sendEmailVerificationNotification();
 
         return $request->wantsJson()
                     ? new Response('', 202)
