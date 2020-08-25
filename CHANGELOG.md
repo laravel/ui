@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.1.0...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.2.0...2.x)
+
+
+## [v2.2.0 (2020-08-25)](https://github.com/laravel/ui/compare/v2.1.0...v2.2.0)
+
+### Added
+- Laravel 8 support ([4a0db5b](https://github.com/laravel/ui/commit/4a0db5b2e5d3c032b0f213e847008d39c8c7ce45))
+
+### Fixed
+- Remove caret and replace `display: none` with `d-none` ([#135](https://github.com/laravel/ui/pull/135))
 
 
 ## [v2.1.0 (2020-06-30)](https://github.com/laravel/ui/compare/v2.0.3...v2.1.0)
