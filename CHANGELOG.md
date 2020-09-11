@@ -1,6 +1,25 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.2.0...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.4.0...2.x)
+
+
+## [v2.4.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.3.0...v2.4.0)
+
+### Fixed
+- Fix Bootstrap preset ([#146](https://github.com/laravel/ui/pull/146))
+
+
+## [v2.3.0 (2020-09-09)](https://github.com/laravel/ui/compare/v2.2.1...v2.3.0)
+
+### Fixed
+- Add namespace check to Auth routes ([#143](https://github.com/laravel/ui/pull/143))
+
+
+## [v2.2.1 (2020-09-08)](https://github.com/laravel/ui/compare/v2.2.0...v2.2.1)
+
+### Fixed
+- Use proper json responses ([#139](https://github.com/laravel/ui/pull/139))
+- Ensure sass directory exists ([456daa3](https://github.com/laravel/ui/commit/456daa330a32483b0fa9794334e60af6b2db3bf6))
 
 
 ## [v2.2.0 (2020-08-25)](https://github.com/laravel/ui/compare/v2.1.0...v2.2.0)
