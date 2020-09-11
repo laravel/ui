@@ -2,8 +2,8 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 trait ConfirmsPasswords
 {
@@ -32,7 +32,7 @@ trait ConfirmsPasswords
         $this->resetPasswordConfirmationTimeout($request);
 
         return $request->wantsJson()
-                    ? new Response('', 204)
+                    ? new JsonResponse([], 204)
                     : redirect()->intended($this->redirectPath());
     }
 
