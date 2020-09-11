@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.4.0...3.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.0.0...3.x)
+
+
+## [v3.0.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.4.0...v3.0.0)
+
+### Added
+- Laravel 8 support ([#155](https://github.com/laravel/ui/pull/155))
+
+### Fixed
+- Fetch reset token explicitly ([#130](https://github.com/laravel/ui/pull/130))
 
 
 ## [v2.4.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.3.0...v2.4.0)
