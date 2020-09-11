@@ -5,6 +5,9 @@
 
 ## [v2.4.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.3.0...v2.4.0)
 
+### Removed
+- Remove Laravel 8 support ([#154](https://github.com/laravel/ui/pull/154))
+
 ### Fixed
 - Fix Bootstrap preset ([#146](https://github.com/laravel/ui/pull/146))
 
