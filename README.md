@@ -14,7 +14,7 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 
 ## Official Documentation
 
-Documentation can be found on the [Laravel website](https://laravel.com/docs/frontend).
+Documentation can be found on the [Laravel website](https://laravel.com/docs/7.x/frontend).
 
 ## Contributing
 
