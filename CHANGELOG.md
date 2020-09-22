@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v2.4.0...2.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v2.4.1...2.x)
+
+
+## [v2.4.1 (2020-09-22)](https://github.com/laravel/ui/compare/v2.4.0...v2.4.1)
+
+### Changed
+- Revert "Add namespace check to Auth routes" ([#160](https://github.com/laravel/ui/pull/160))
 
 
 ## [v2.4.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.3.0...v2.4.0)
