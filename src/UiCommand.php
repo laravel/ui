@@ -57,8 +57,8 @@ class UiCommand extends Command
     {
         Presets\Bootstrap::install();
 
+        exec('npm install && npm run dev');
         $this->info('Bootstrap scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
 
     /**
@@ -71,8 +71,8 @@ class UiCommand extends Command
         Presets\Bootstrap::install();
         Presets\Vue::install();
 
+        exec('npm install && npm run dev');
         $this->info('Vue scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
 
     /**
@@ -85,7 +85,7 @@ class UiCommand extends Command
         Presets\Bootstrap::install();
         Presets\React::install();
 
+        exec('npm install && npm run dev');
         $this->info('React scaffolding installed successfully.');
-        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
 }
