@@ -12,15 +12,6 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 
 **We are not accepting new presets.**
 
-## Installation
-
-To install Laravel UI, use Composer:
-`composer require laravel/ui:^2.4`
-
-## Official Documentation
-
-Documentation can be found on the [Laravel website](https://laravel.com/docs/7.x/frontend).
-
 ## Contributing
 
 Thank you for considering contributing to UI! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
