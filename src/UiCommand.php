@@ -13,7 +13,7 @@ class UiCommand extends Command
      * @var string
      */
     protected $signature = 'ui
-                    { type : The preset type (bootstrap, vue, react) }
+                    { type : The preset type (bootstrap, vue, react, tailwind) }
                     { --auth : Install authentication UI scaffolding }
                     { --option=* : Pass an option to the preset command }';
 
@@ -37,7 +37,7 @@ class UiCommand extends Command
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap', 'vue', 'react'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'vue', 'react', 'tailwind'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 
@@ -86,6 +86,19 @@ class UiCommand extends Command
         Presets\React::install();
 
         $this->info('React scaffolding installed successfully.');
+        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+    }
+
+    /**
+     * Install the "tailwind" preset.
+     *
+     * @return void
+     */
+    protected function tailwind()
+    {
+        Presets\Tailwind::install();
+
+        $this->info('Tailwind scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
 }
