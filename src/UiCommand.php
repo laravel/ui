@@ -44,7 +44,11 @@ class UiCommand extends Command
         $this->{$this->argument('type')}();
 
         if ($this->option('auth')) {
-            $this->call('ui:auth');
+            if($this->argument('type') == 'tailwind') {
+                $this->call('ui:auth', ['type' => 'tailwind']);
+            }else {
+                $this->call('ui:auth');
+            }
         }
     }
 
