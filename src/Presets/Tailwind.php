@@ -17,6 +17,7 @@ class Tailwind extends Preset
         static::updateWebpackConfiguration();
         static::updateCss();
         static::updateTailwindConfiguration();
+        static::updateBootstrapping();
         static::removeNodeModules();
     }
 
@@ -32,6 +33,7 @@ class Tailwind extends Preset
             '@tailwindcss/ui' => '^0.5.0',
             'postcss-import' => '^12.0.1',
             'tailwindcss' => '^1.3.0',
+            'alpinejs' => '^2.7.0',
         ] + $packages;
     }
 
@@ -65,5 +67,15 @@ class Tailwind extends Preset
     protected static function updateTailwindConfiguration()
     {
         copy(__DIR__.'/tailwind-stubs/tailwindcss-config.js', base_path('tailwindcss-config.js'));
+    }
+
+    /**
+     * Update the bootstrapping files.
+     *
+     * @return void
+     */
+    protected static function updateBootstrapping()
+    {
+        copy(__DIR__.'/tailwind-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 }
