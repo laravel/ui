@@ -6,7 +6,8 @@
 
 ## Introduction
 
-### This project should no longer be used on new Laravel projects. Please use [Laravel Jetstream](https://github.com/laravel/jetstream) instead.
+### This project should no longer be used on new Laravel projects. We made a separate package for independent [authentication without a GUI](https://github.com/laravel/fortify), and also created a [beautifully designed application scaffolding using Tailwind CSS](https://github.com/laravel/jetstream).
+
 
 While Laravel does not dictate which JavaScript or CSS pre-processors you use, it does provide a basic starting point using [Bootstrap](https://getbootstrap.com/), [React](https://reactjs.org/), and / or [Vue](https://vuejs.org/) that will be helpful for many applications. By default, Laravel uses [NPM](https://www.npmjs.org/) to install both of these frontend packages.
 
