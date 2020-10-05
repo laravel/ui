@@ -13,23 +13,27 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 
 The Bootstrap and Vue scaffolding provided by Laravel is located in the `laravel/ui` Composer package, which may be installed using Composer:
 
-    composer require laravel/ui:
+```bash
+composer require laravel/ui
+```
 
 Once the `laravel/ui` package has been installed, you may install the frontend scaffolding using the `ui` Artisan command:
 
-    // Generate basic scaffolding...
-    php artisan ui bootstrap
-    php artisan ui vue
-    php artisan ui react
+```bash
+// Generate basic scaffolding...
+php artisan ui bootstrap
+php artisan ui vue
+php artisan ui react
 
-    // Generate login / registration scaffolding...
-    php artisan ui bootstrap --auth
-    php artisan ui vue --auth
-    php artisan ui react --auth
+// Generate login / registration scaffolding...
+php artisan ui bootstrap --auth
+php artisan ui vue --auth
+php artisan ui react --auth
+```
 
 #### CSS
 
-[Laravel Mix](/docs/{{version}}/mix) provides a clean, expressive API over compiling SASS or Less, which are extensions of plain CSS that add variables, mixins, and other powerful features that make working with CSS much more enjoyable. In this document, we will briefly discuss CSS compilation in general; however, you should consult the full [Laravel Mix documentation](/docs/{{version}}/mix) for more information on compiling SASS or Less.
+[Laravel Mix](https://laravel.com/docs/mix) provides a clean, expressive API over compiling SASS or Less, which are extensions of plain CSS that add variables, mixins, and other powerful features that make working with CSS much more enjoyable. In this document, we will briefly discuss CSS compilation in general; however, you should consult the full [Laravel Mix documentation](https://laravel.com/docs/mix) for more information on compiling SASS or Less.
 
 #### JavaScript
 
@@ -41,25 +45,33 @@ After installing the `laravel/ui` Composer package and [generating the frontend 
 
 Before compiling your CSS, install your project's frontend dependencies using the [Node package manager (NPM)](https://www.npmjs.org):
 
-    npm install
+```bash
+npm install
+```
 
-Once the dependencies have been installed using `npm install`, you can compile your SASS files to plain CSS using [Laravel Mix](/docs/{{version}}/mix#working-with-stylesheets). The `npm run dev` command will process the instructions in your `webpack.mix.js` file. Typically, your compiled CSS will be placed in the `public/css` directory:
+Once the dependencies have been installed using `npm install`, you can compile your SASS files to plain CSS using [Laravel Mix](https://laravel.com/docs/mix#working-with-stylesheets). The `npm run dev` command will process the instructions in your `webpack.mix.js` file. Typically, your compiled CSS will be placed in the `public/css` directory:
 
-    npm run dev
+```bash
+npm run dev
+```
 
-The `webpack.mix.js` file included with Laravel's frontend scaffolding will compile the `resources/sass/app.scss` SASS file. This `app.scss` file imports a file of SASS variables and loads Bootstrap, which provides a good starting point for most applications. Feel free to customize the `app.scss` file however you wish or even use an entirely different pre-processor by [configuring Laravel Mix](/docs/{{version}}/mix).
+The `webpack.mix.js` file included with Laravel's frontend scaffolding will compile the `resources/sass/app.scss` SASS file. This `app.scss` file imports a file of SASS variables and loads Bootstrap, which provides a good starting point for most applications. Feel free to customize the `app.scss` file however you wish or even use an entirely different pre-processor by [configuring Laravel Mix](https://laravel.com/docs/mix).
 
 ## Writing JavaScript
 
 All of the JavaScript dependencies required by your application can be found in the `package.json` file in the project's root directory. This file is similar to a `composer.json` file except it specifies JavaScript dependencies instead of PHP dependencies. You can install these dependencies using the [Node package manager (NPM)](https://www.npmjs.org):
 
-    npm install
+```bash
+npm install
+```
 
-> {tip} By default, the Laravel `package.json` file includes a few packages such as `lodash` and `axios` to help you get started building your JavaScript application. Feel free to add or remove from the `package.json` file as needed for your own application.
+> By default, the Laravel `package.json` file includes a few packages such as `lodash` and `axios` to help you get started building your JavaScript application. Feel free to add or remove from the `package.json` file as needed for your own application.
 
-Once the packages are installed, you can use the `npm run dev` command to [compile your assets](/docs/{{version}}/mix). Webpack is a module bundler for modern JavaScript applications. When you run the `npm run dev` command, Webpack will execute the instructions in your `webpack.mix.js` file:
+Once the packages are installed, you can use the `npm run dev` command to [compile your assets](https://laravel.com/docs/mix). Webpack is a module bundler for modern JavaScript applications. When you run the `npm run dev` command, Webpack will execute the instructions in your `webpack.mix.js` file:
 
-    npm run dev
+```bash
+npm run dev
+```
 
 By default, the Laravel `webpack.mix.js` file compiles your SASS and the `resources/js/app.js` file. Within the `app.js` file you may register your Vue components or, if you prefer a different framework, configure your own JavaScript application. Your compiled JavaScript will typically be placed in the `public/js` directory.
 
@@ -70,52 +82,57 @@ By default, the Laravel `webpack.mix.js` file compiles your SASS and the `resour
 
 When using the `laravel/ui` package to scaffold your frontend, an `ExampleComponent.vue` Vue component will be placed in the `resources/js/components` directory. The `ExampleComponent.vue` file is an example of a [single file Vue component](https://vuejs.org/guide/single-file-components) which defines its JavaScript and HTML template in the same file. Single file components provide a very convenient approach to building JavaScript driven applications. The example component is registered in your `app.js` file:
 
-    Vue.component(
-        'example-component',
-        require('./components/ExampleComponent.vue').default
-    );
+```javascript
+Vue.component(
+    'example-component',
+    require('./components/ExampleComponent.vue').default
+);
+```
 
 To use the component in your application, you may drop it into one of your HTML templates. For example, after running the `php artisan ui vue --auth` Artisan command to scaffold your application's authentication and registration screens, you could drop the component into the `home.blade.php` Blade template:
 
-    @extends('layouts.app')
+```blade
+@extends('layouts.app')
 
-    @section('content')
-        <example-component></example-component>
-    @endsection
+@section('content')
+    <example-component></example-component>
+@endsection
+```
 
 > Remember, you should run the `npm run dev` command each time you change a Vue component. Or, you may run the `npm run watch` command to monitor and automatically recompile your components each time they are modified.
 
 If you are interested in learning more about writing Vue components, you should read the [Vue documentation](https://vuejs.org/guide/), which provides a thorough, easy-to-read overview of the entire Vue framework.
 
-<a name="using-react"></a>
 ### Using React
 
 If you prefer to use React to build your JavaScript application, Laravel makes it a cinch to swap the Vue scaffolding with React scaffolding:
 
-    composer require laravel/ui
+```bash
+composer require laravel/ui
 
-    // Generate basic scaffolding...
-    php artisan ui react
+// Generate basic scaffolding...
+php artisan ui react
 
-    // Generate login / registration scaffolding...
-    php artisan ui react --auth
-
+// Generate login / registration scaffolding...
+php artisan ui react --auth
+````
 
 ## Adding Presets
 
-Presets are "macroable", which allows you to add additional methods to the `UiCommand` class at runtime. For example, the following code adds a `nextjs` method to the `UiCommand` class. Typically, you should declare preset macros in a [service provider](/docs/{{version}}/providers):
+Presets are "macroable", which allows you to add additional methods to the `UiCommand` class at runtime. For example, the following code adds a `nextjs` method to the `UiCommand` class. Typically, you should declare preset macros in a [service provider](https://laravel.com/docs/providers):
 
-    use Laravel\Ui\UiCommand;
+```php
+use Laravel\Ui\UiCommand;
 
-    UiCommand::macro('nextjs', function (UiCommand $command) {
-        // Scaffold your frontend...
-    });
-
+UiCommand::macro('nextjs', function (UiCommand $command) {
+    // Scaffold your frontend...
+});
+```
 Then, you may call the new preset via the `ui` command:
 
-    php artisan ui nextjs
-
-
+```bash
+php artisan ui nextjs
+```
 
 ## Contributing
 
