@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/laravel/ui/compare/v3.0.0...master)
 
+### Changed
+- Add sourcemaps to webpack config ([#168](https://github.com/laravel/ui/pull/168))
+
 
 ## [v3.0.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.4.0...v3.0.0)
 
@@ -10,6 +13,12 @@
 
 ### Fixed
 - Fetch reset token explicitly ([#130](https://github.com/laravel/ui/pull/130))
+
+
+## [v2.4.1 (2020-09-22)](https://github.com/laravel/ui/compare/v2.4.0...v2.4.1)
+
+### Changed
+- Revert "Add namespace check to Auth routes" ([#160](https://github.com/laravel/ui/pull/160))
 
 
 ## [v2.4.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.3.0...v2.4.0)
