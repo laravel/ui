@@ -7,6 +7,8 @@ use InvalidArgumentException;
 
 class UiCommand extends Command
 {
+    use SharedCommandMethods;
+
     /**
      * The console command signature.
      *
@@ -14,8 +16,9 @@ class UiCommand extends Command
      */
     protected $signature = 'ui
                     { type : The preset type (bootstrap, vue, react) }
-                    { --auth : Install authentication UI scaffolding }
-                    { --option=* : Pass an option to the preset command }';
+                    {guard? : Install authentication guard }
+                    {--auth : Install authentication UI scaffolding }
+                    {--option=* : Pass an option to the preset command }';
 
     /**
      * The console command description.
@@ -44,7 +47,9 @@ class UiCommand extends Command
         $this->{$this->argument('type')}();
 
         if ($this->option('auth')) {
-            $this->call('ui:auth');
+            $this->call('ui:auth',[
+                "guard"=>$this->getGuardName()
+            ]);
         }
     }
 

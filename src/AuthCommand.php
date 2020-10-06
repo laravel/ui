@@ -7,6 +7,8 @@ use InvalidArgumentException;
 
 class AuthCommand extends Command
 {
+    use SharedCommandMethods;
+
     /**
      * The name and signature of the console command.
      *
@@ -14,6 +16,7 @@ class AuthCommand extends Command
      */
     protected $signature = 'ui:auth
                     { type=bootstrap : The preset type (bootstrap) }
+                    {guard? : Install authentication guard }
                     {--views : Only scaffold the authentication views}
                     {--force : Overwrite existing views by default}';
 
@@ -45,7 +48,7 @@ class AuthCommand extends Command
      *
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function handle()
     {
@@ -53,14 +56,14 @@ class AuthCommand extends Command
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap'])) {
+        if (!in_array($this->argument('type'), ['bootstrap'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 
         $this->ensureDirectoriesExist();
         $this->exportViews();
 
-        if (! $this->option('views')) {
+        if (!$this->option('views')) {
             $this->exportBackend();
         }
 
@@ -74,13 +77,21 @@ class AuthCommand extends Command
      */
     protected function ensureDirectoriesExist()
     {
-        if (! is_dir($directory = $this->getViewPath('layouts'))) {
-            mkdir($directory, 0755, true);
-        }
+        $this->isDirAndMake($this->getViewPath($this->prefixViewPath(). '/layouts'));
+        $this->isDirAndMake($this->getViewPath($this->prefixViewPath(). '/auth/passwords'));
+    }
 
-        if (! is_dir($directory = $this->getViewPath('auth/passwords'))) {
-            mkdir($directory, 0755, true);
-        }
+    /**
+     * Get full view path relative to the application's configured view path.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function getViewPath($path)
+    {
+        return implode(DIRECTORY_SEPARATOR, [
+            config('view.paths')[0] ?? resource_path('views'), $path,
+        ]);
     }
 
     /**
@@ -91,16 +102,26 @@ class AuthCommand extends Command
     protected function exportViews()
     {
         foreach ($this->views as $key => $value) {
-            if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
-                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
+            $value = $this->prefixViewPath() . DIRECTORY_SEPARATOR . $value;
+            if (file_exists($view = $this->getViewPath($value)) && !$this->option('force')) {
+                if (!$this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
                     continue;
                 }
             }
 
             copy(
-                __DIR__.'/Auth/'.$this->argument('type').'-stubs/'.$key,
+                __DIR__ . '/Auth/' . $this->argument('type') . '-stubs/' . $key,
                 $view
             );
+            $content = str_replace([
+                '{{authGuard}}',
+                '{{view}}'
+            ], [
+                $this->getGuardName(),
+                $this->handleViewPath(),
+            ], file_get_contents($view));
+
+            file_put_contents($view, $content);
         }
     }
 
@@ -111,26 +132,45 @@ class AuthCommand extends Command
      */
     protected function exportBackend()
     {
-        $this->callSilent('ui:controllers');
+        $this->callSilent('ui:controllers', [
+            "guard" => $this->getGuardName()
+        ]);
+        $directory = app_path('Http/Controllers' . str_replace('\\', '/', $this->newGuardNamesapce()));
+        $controller = $directory . '/HomeController.php';
 
-        $controller = app_path('Http/Controllers/HomeController.php');
-
-        if (file_exists($controller) && ! $this->option('force')) {
+        if (file_exists($controller) && !$this->option('force')) {
             if ($this->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
+                $this->isDirAndMake($directory);
                 file_put_contents($controller, $this->compileControllerStub());
             }
         } else {
+            $this->isDirAndMake($directory);
             file_put_contents($controller, $this->compileControllerStub());
         }
+        $routes = str_replace(
+            [
+                '{{namespace}}',
+                '{{ namespaceAuthGuard }}',
+                '{{authGuard}}',
+                '{{view}}',
+            ],
+            [
+                $this->laravel->getNamespace(),
+                $this->newGuardNamesapce(),
+                $this->getGuardName(),
+                $this->handleViewPath(),
+            ],
+            file_get_contents(__DIR__ . '/Auth/stubs/routes.stub')
+        );
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
+            $routes,
             FILE_APPEND
         );
 
         copy(
-            __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
+            __DIR__ . '/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
             base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
         );
     }
@@ -142,23 +182,13 @@ class AuthCommand extends Command
      */
     protected function compileControllerStub()
     {
-        return str_replace(
-            '{{namespace}}',
-            $this->laravel->getNamespace(),
-            file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
+        return str_replace([
+            '{{namespace}}', '{{namespaceAuthGuard}}', '{{view}}', '{{newAuthGuard}}'
+        ], [
+            $this->laravel->getNamespace(), $this->newGuardNamesapce(), $this->handleViewPath(), $this->getGuardName()
+        ],
+            file_get_contents(__DIR__ . '/Auth/stubs/controllers/HomeController.stub')
         );
     }
 
-    /**
-     * Get full view path relative to the application's configured view path.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    protected function getViewPath($path)
-    {
-        return implode(DIRECTORY_SEPARATOR, [
-            config('view.paths')[0] ?? resource_path('views'), $path,
-        ]);
-    }
 }

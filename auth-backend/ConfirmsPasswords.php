@@ -3,27 +3,37 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 trait ConfirmsPasswords
 {
     use RedirectsUsers;
 
     /**
+     * @return string
+     */
+    public function viewPrefixPath():string
+    {
+        return $this->viewPrefixPath ?? '';
+    }
+
+    /**
      * Display the password confirmation view.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function showConfirmForm()
     {
-        return view('auth.passwords.confirm');
+        return view($this->viewPrefixPath() . 'auth.passwords.confirm');
     }
 
     /**
      * Confirm the given user's password.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return RedirectResponse|JsonResponse
      */
     public function confirm(Request $request)
     {
@@ -32,19 +42,8 @@ trait ConfirmsPasswords
         $this->resetPasswordConfirmationTimeout($request);
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 204)
-                    : redirect()->intended($this->redirectPath());
-    }
-
-    /**
-     * Reset the password confirmation timeout.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    protected function resetPasswordConfirmationTimeout(Request $request)
-    {
-        $request->session()->put('auth.password_confirmed_at', time());
+            ? new JsonResponse([], 204)
+            : redirect()->intended($this->redirectPath());
     }
 
     /**
@@ -67,5 +66,16 @@ trait ConfirmsPasswords
     protected function validationErrorMessages()
     {
         return [];
+    }
+
+    /**
+     * Reset the password confirmation timeout.
+     *
+     * @param Request $request
+     * @return void
+     */
+    protected function resetPasswordConfirmationTimeout(Request $request)
+    {
+        $request->session()->put('auth.password_confirmed_at', time());
     }
 }

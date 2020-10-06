@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('{{view}}layouts.app')
 
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in {{authGuard}}!') }}
                 </div>
             </div>
         </div>

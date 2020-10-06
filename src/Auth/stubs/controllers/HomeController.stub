@@ -1,7 +1,8 @@
 <?php
 
-namespace {{namespace}}Http\Controllers;
+namespace {{namespace}}Http\Controllers{{namespaceAuthGuard}};
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:{{newAuthGuard}}');
     }
 
     /**
@@ -23,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('{{view}}home');
     }
 }

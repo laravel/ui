@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace {{namespace}}Http\Controllers{{ namespaceAuthGuard }}\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -31,6 +31,8 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $viewPrefixPath = "{{ viewPrefixPath }}";
+
     /**
      * Create a new controller instance.
      *
@@ -38,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:{{ AuthNewGuard }}');
     }
 
     /**

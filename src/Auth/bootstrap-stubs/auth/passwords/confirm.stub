@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('{{view}}layouts.app')
 
 @section('content')
 <div class="container">
@@ -10,7 +10,7 @@
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
+                    <form method="POST" action="{{ route('{{view}}password.confirm') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -33,8 +33,8 @@
                                     {{ __('Confirm Password') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                @if (Route::has('{{view}}password.request'))
+                                    <a class="btn btn-link" href="{{ route('{{view}}password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif

@@ -2,6 +2,8 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use App\Providers\RouteServiceProvider;
+
 trait RedirectsUsers
 {
     /**
@@ -15,6 +17,6 @@ trait RedirectsUsers
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : (RouteServiceProvider::HOME ?? '/');
     }
 }

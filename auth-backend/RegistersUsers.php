@@ -12,13 +12,21 @@ trait RegistersUsers
     use RedirectsUsers;
 
     /**
+     * @return string
+     */
+    public function viewPrefixPath():string
+    {
+        return $this->viewPrefixPath ?? '';
+    }
+
+    /**
      * Show the application registration form.
      *
      * @return \Illuminate\View\View
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view($this->viewPrefixPath().'auth.register');
     }
 
     /**

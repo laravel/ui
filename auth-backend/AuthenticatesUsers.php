@@ -4,7 +4,6 @@ namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 trait AuthenticatesUsers
@@ -12,13 +11,21 @@ trait AuthenticatesUsers
     use RedirectsUsers, ThrottlesLogins;
 
     /**
+     * @return string
+     */
+    public function viewPrefixPath():string
+    {
+        return $this->viewPrefixPath ?? '';
+    }
+
+    /**
      * Show the application's login form.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view($this->viewPrefixPath().'auth.login');
     }
 
     /**
@@ -189,11 +196,11 @@ trait AuthenticatesUsers
 
     /**
      * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @param string|null $guard
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
      */
-    protected function guard()
+    protected function guard(string $guard =null )
     {
-        return Auth::guard();
+        return \auth()->guard($guard);
     }
 }
