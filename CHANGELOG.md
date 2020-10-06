@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/laravel/ui/compare/v3.0.0...3.x)
 
+### Changed
+- Add sourcemaps to webpack config ([#168](https://github.com/laravel/ui/pull/168))
+
 
 ## [v3.0.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.4.0...v3.0.0)
 
