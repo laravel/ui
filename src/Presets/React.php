@@ -34,7 +34,15 @@ class React extends Preset
             '@babel/preset-react' => '^7.0.0',
             'react' => '^16.2.0',
             'react-dom' => '^16.2.0',
-        ] + Arr::except($packages, ['vue', 'vue-template-compiler']);
+            '@shopify/app-bridge' => '^1.27.2',
+            '@shopify/app-bridge-utils' => '^1.27.2',
+        ] + Arr::except($packages, [
+            'vue',
+            'vue-template-compiler',
+            'vue-router',
+            'vuex',
+            'vue-axios',
+        ]);
     }
 
     /**

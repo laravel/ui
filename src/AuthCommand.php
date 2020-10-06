@@ -13,7 +13,7 @@ class AuthCommand extends Command
      * @var string
      */
     protected $signature = 'ui:auth
-                    { type=bootstrap : The preset type (bootstrap) }
+                    { type=default : The preset type (default) }
                     {--views : Only scaffold the authentication views}
                     {--force : Overwrite existing views by default}';
 
@@ -53,7 +53,7 @@ class AuthCommand extends Command
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap'])) {
+        if (! in_array($this->argument('type'), ['default'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 

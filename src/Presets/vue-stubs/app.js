@@ -1,12 +1,19 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-require('./bootstrap');
+import router from './router';
+import store from './store'
 
-window.Vue = require('vue');
+import Base from './Base'
+
+Vue.config.productionTip = false
+
+import createApp from '@shopify/app-bridge';
+import getSessionToken from '@shopify/app-bridge-utils'
+import { Redirect, History, Loading } from '@shopify/app-bridge/actions';
+
+Vue.use(VueRouter);
+Vue.router = router;
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,14 +26,78 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('connect-github', require('./components/ConnectGithub.vue').default);
+// Vue.component('github-organisation', require('./components/GithubOrganisation.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+// const token = document.getElementById('token').innerText
+const key = document.getElementById('shop_key').innerText
+const name = document.getElementById('shop_name').innerText
 
-const app = new Vue({
+store.commit('app/shop', name);
+
+require('./bootstrap');
+
+try {
+  console.log('this will only work when we are out of iframe')
+  const url = window.top.location.href
+  console.log('this should not happen')
+  console.log(key, name)
+  const redirect = `https://${name}/admin/apps/${key}`
+  window.top.location.href = redirect
+} catch (e) {
+  console.log('this should fail if app is embedded')
+  console.log(e)
+}
+
+
+// const app = new Vue({
+    // el: '#app',
+    // router,
+    // component: { template: '<router-view></router-view>' }
+// })
+
+const start = () => {
+  // console.log('starting')
+  /* eslint-disable no-new */
+  const app = new Vue({
     el: '#app',
-});
+    router,
+    store,
+    // render: function (createElement) {
+      // return createElement('router-view')
+    // },
+    // component: require('./Base.vue').default,
+    template: '<Base/>',
+    components: {
+      Base
+    }
+  })
+
+  const shopifyApp = createApp({
+    apiKey: key,
+    shopOrigin: name,
+    forceRedirect: true,
+  });
+
+  shopifyApp.subscribe(Redirect.ActionType.APP, function(redirectData) {
+    console.log(redirectData.path) // For example, '/settings'
+    console.log(app.$router, router)
+    app.$router.push(redirectData.path)
+  });
+
+  const history = History.create(shopifyApp);
+  history.dispatch(History.Action.PUSH, `${window.location.pathname}`);
+
+  const loading = Loading.create(shopifyApp);
+
+  // shopifyApp.subscribe(Loading.ActionType.START, () => {
+    // console.log('START')
+  // })
+
+  app.loading = loading
+  app.shopifyApp = shopifyApp
+}
+
+window.onload = () => {
+  start()
+}

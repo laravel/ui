@@ -4,7 +4,7 @@ namespace Laravel\Ui\Presets;
 
 use Illuminate\Filesystem\Filesystem;
 
-class Bootstrap extends Preset
+class Default extends Preset
 {
     /**
      * Install the preset.
@@ -28,13 +28,18 @@ class Bootstrap extends Preset
      */
     protected static function updatePackageArray(array $packages)
     {
-        return [
-            'bootstrap' => '^4.0.0',
-            'jquery' => '^3.2',
-            'popper.js' => '^1.12',
-            'sass' => '^1.15.2',
-            'sass-loader' => '^8.0.0',
-        ] + $packages;
+        Arr::except($packages, [
+            'vue',
+            'vue-template-compiler',
+            'vue-router',
+            'vuex',
+            'vue-axios',
+            '@babel/preset-react',
+            'react',
+            'react-dom',
+            '@shopify/app-bridge',
+            '@shopify/app-bridge-utils',
+        ]);
     }
 
     /**
@@ -44,7 +49,7 @@ class Bootstrap extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/bootstrap-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/default-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -54,10 +59,9 @@ class Bootstrap extends Preset
      */
     protected static function updateSass()
     {
-        (new Filesystem)->ensureDirectoryExists(resource_path('sass'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('css'));
 
-        copy(__DIR__.'/bootstrap-stubs/_variables.scss', resource_path('sass/_variables.scss'));
-        copy(__DIR__.'/bootstrap-stubs/app.scss', resource_path('sass/app.scss'));
+        copy(__DIR__.'/default-stubs/app.css', resource_path('css/app.css'));
     }
 
     /**
@@ -67,6 +71,6 @@ class Bootstrap extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/bootstrap-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__.'/default-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 }
