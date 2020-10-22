@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -60,14 +59,30 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userNamespace = $this->resolveUserModelNamespace();
+
+        return $userNamespace::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * Resolves the correct User's model namespace.
+     *
+     * @return string
+     */
+    protected function resolveUserModelNamespace()
+    {
+        if (is_dir(app_path('Models'))) {
+            return 'App\\Models\\User';
+        }
+
+        return 'App\\User';
     }
 }
