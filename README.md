@@ -24,13 +24,17 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 - [Security Vulnerabilities](#security-vulnerabilities)
 - [License](#license)
 
+## Official Documentation
+
+### Supported Versions
+
+Only the latest major version of Laravel UI receives bug fixes. Below you can find a list with compatible Laravel versions.
+
 | Version | Laravel Version |
 |---- |----|
 | [1.x](https://github.com/laravel/ui/tree/1.x) | 5.8, 6.x |
 | [2.x](https://github.com/laravel/ui/tree/2.x) | 7.x |
 | [3.x](https://github.com/laravel/ui/tree/3.x) | 8.x |
-
-## Official Documentation
 
 ### Installation
 
