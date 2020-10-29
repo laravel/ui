@@ -11,6 +11,7 @@
 While Laravel does not dictate which JavaScript or CSS pre-processors you use, it does provide a basic starting point using [Bootstrap](https://getbootstrap.com/), [React](https://reactjs.org/), and / or [Vue](https://vuejs.org/) that will be helpful for many applications. By default, Laravel uses [NPM](https://www.npmjs.org/) to install both of these frontend packages.
 
 - [Official Documentation](#official-documentation)
+    - [Supported Versions](#supported-versions)
     - [Installation](#installation)
         - [CSS](#css)
         - [JavaScript](#javascript)
@@ -24,13 +25,17 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 - [Security Vulnerabilities](#security-vulnerabilities)
 - [License](#license)
 
+## Official Documentation
+
+### Supported Versions
+
+Only the latest major version of Laravel UI receives bug fixes. The table below lists compatible Laravel versions:
+
 | Version | Laravel Version |
 |---- |----|
 | [1.x](https://github.com/laravel/ui/tree/1.x) | 5.8, 6.x |
 | [2.x](https://github.com/laravel/ui/tree/2.x) | 7.x |
 | [3.x](https://github.com/laravel/ui/tree/3.x) | 8.x |
-
-## Official Documentation
 
 ### Installation
 
