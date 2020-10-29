@@ -29,7 +29,7 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 
 ### Supported Versions
 
-Only the latest major version of Laravel UI receives bug fixes. Below you can find a list with compatible Laravel versions.
+Only the latest major version of Laravel UI receives bug fixes. The table below lists compatible Laravel versions:
 
 | Version | Laravel Version |
 |---- |----|
