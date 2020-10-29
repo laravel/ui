@@ -24,8 +24,6 @@ While Laravel does not dictate which JavaScript or CSS pre-processors you use, i
 - [Security Vulnerabilities](#security-vulnerabilities)
 - [License](#license)
 
-### Support for older laravel version
-
 | Version | Laravel Version |
 |---- |----|
 | [1.x](https://github.com/laravel/ui/tree/1.x) | 5.8, 6.x |
