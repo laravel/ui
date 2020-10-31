@@ -10,24 +10,15 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5|^8.0",
         "illuminate/console": "^7.0",
         "illuminate/filesystem": "^7.0",
         "illuminate/support": "^7.0"
-    },
-    "require-dev": {
-        "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {
             "Laravel\\Ui\\": "src/",
             "Illuminate\\Foundation\\Auth\\": "auth-backend/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Laravel\\Ui\\Tests\\": "tests/"
         }
     },
     "config": {
