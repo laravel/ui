@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v1.2.0...1.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v1.3.0...1.x)
+
+
+## [v1.3.0 (2020-11-03)](https://github.com/laravel/ui/compare/v1.2.0...v1.3.0)
+
+### Added
+- PHP 8 Support ([#180](https://github.com/laravel/ui/pull/180))
 
 
 ## [v1.2.0 (2020-02-18)](https://github.com/laravel/ui/compare/v1.1.2...v1.2.0)
