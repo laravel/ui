@@ -1,9 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v3.0.0...3.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.1.0...3.x)
+
+
+## [v3.1.0 (2020-11-03)](https://github.com/laravel/ui/compare/v3.0.0...v3.1.0)
+
+### Added
+- Added PHP 8 Support ([#178](https://github.com/laravel/ui/pull/178))
 
 ### Changed
 - Add sourcemaps to webpack config ([#168](https://github.com/laravel/ui/pull/168))
+
+### Fixed
+- Wrap login link in app.stub with a route check ([#177](https://github.com/laravel/ui/pull/177))
 
 
 ## [v3.0.0 (2020-09-11)](https://github.com/laravel/ui/compare/v2.4.0...v3.0.0)
