@@ -15,10 +15,12 @@ class AuthRouteMethods
         return function ($options = []) {
             $namespace = class_exists($this->prependGroupNamespace('Auth\LoginController')) ? null : 'App\Http\Controllers';
 
-            $this->group(['namespace' => $namespace], function() use($options) {
+            $this->group(['namespace' => $namespace], function () use ($options) {
                 // Login Routes...
                 if ($options['login'] ?? true) {
-                    $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+                    if ($options['ui'] ?? true) {
+                        $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+                    }
                     $this->post('login', 'Auth\LoginController@login');
                 }
 
@@ -29,24 +31,28 @@ class AuthRouteMethods
 
                 // Registration Routes...
                 if ($options['register'] ?? true) {
-                    $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+                    if ($options['ui'] ?? true) {
+                        $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+                    }
                     $this->post('register', 'Auth\RegisterController@register');
                 }
 
                 // Password Reset Routes...
                 if ($options['reset'] ?? true) {
-                    $this->resetPassword();
+                    $this->resetPassword($options);
                 }
 
                 // Password Confirmation Routes...
-                if ($options['confirm'] ??
-                    class_exists($this->prependGroupNamespace('Auth\ConfirmPasswordController'))) {
-                    $this->confirmPassword();
+                if (
+                    $options['confirm'] ??
+                    class_exists($this->prependGroupNamespace('Auth\ConfirmPasswordController'))
+                ) {
+                    $this->confirmPassword($options);
                 }
 
                 // Email Verification Routes...
                 if ($options['verify'] ?? false) {
-                    $this->emailVerification();
+                    $this->emailVerification($options);
                 }
             });
         };
@@ -55,14 +61,18 @@ class AuthRouteMethods
     /**
      * Register the typical reset password routes for an application.
      *
+     * @param  array  $options
      * @return callable
      */
-    public function resetPassword()
+    public function resetPassword($options = [])
     {
         return function () {
-            $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+            if ($options['ui'] ?? true) {
+                $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+            }
             $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-            $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+            if ($options['ui'] ?? true)
+                $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
             $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
         };
     }
@@ -70,12 +80,15 @@ class AuthRouteMethods
     /**
      * Register the typical confirm password routes for an application.
      *
+     * @param  array  $options
      * @return callable
      */
-    public function confirmPassword()
+    public function confirmPassword($options = [])
     {
         return function () {
-            $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+            if ($options['ui'] ?? true) {
+                $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+            }
             $this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
         };
     }
@@ -83,13 +96,16 @@ class AuthRouteMethods
     /**
      * Register the typical email verification routes for an application.
      *
+     * @param  array  $options
      * @return callable
      */
-    public function emailVerification()
+    public function emailVerification($options = [])
     {
         return function () {
-            $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-            $this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+            if ($options['ui'] ?? true) {
+                $this->get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+                $this->get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+            }
             $this->post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
         };
     }
