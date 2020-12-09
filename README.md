@@ -52,10 +52,12 @@ Once the `laravel/ui` package has been installed, you may install the frontend s
 php artisan ui bootstrap
 php artisan ui vue
 php artisan ui react
+php artisan ui vue3
 
 // Generate login / registration scaffolding...
 php artisan ui bootstrap --auth
 php artisan ui vue --auth
+php artisan ui vue3 --auth
 php artisan ui react --auth
 ```
 

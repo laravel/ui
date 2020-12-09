@@ -37,7 +37,7 @@ class UiCommand extends Command
             return call_user_func(static::$macros[$this->argument('type')], $this);
         }
 
-        if (! in_array($this->argument('type'), ['bootstrap', 'vue', 'react'])) {
+        if (! in_array($this->argument('type'), ['bootstrap', 'vue', 'react', 'vue3'])) {
             throw new InvalidArgumentException('Invalid preset.');
         }
 
@@ -70,6 +70,20 @@ class UiCommand extends Command
     {
         Presets\Bootstrap::install();
         Presets\Vue::install();
+
+        $this->info('Vue scaffolding installed successfully.');
+        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+    }
+
+    /**
+     * Install the "vue 3" preset.
+     *
+     * @return void
+     */
+    protected function vue3()
+    {
+        Presets\Bootstrap::install();
+        Presets\VueNext::install();
 
         $this->info('Vue scaffolding installed successfully.');
         $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');

@@ -1,0 +1,27 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npx mix watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "npx mix watch --hot",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.19",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^7.0",
+        "jquery": "^3.2",
+        "laravel-mix": "^6.0.0-beta.10",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0",
+        "@vue/compiler-sfc": "^3.0.2",
+        "vue-loader": "^16.0.0-rc.1",
+        "vue": "^3.0.2"
+    }
+}
