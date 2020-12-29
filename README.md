@@ -1,3 +1,5 @@
+We're not maintaining anymore updates to this package for new presets, etc. You're welcome to publish this as your own open source package. Not changing this repository anymore. Send updates to laravel/breeze.
+
 # Laravel UI
 
 <a href="https://packagist.org/packages/laravel/ui"><img src="https://img.shields.io/packagist/dt/laravel/ui" alt="Total Downloads"></a>
