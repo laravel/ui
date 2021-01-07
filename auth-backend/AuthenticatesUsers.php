@@ -44,6 +44,8 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            event(new UserLoggedIn($this->guard()->user()));
+            
             return $this->sendLoginResponse($request);
         }
 
