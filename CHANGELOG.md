@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v3.1.0...master)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.2.0...master)
+
+
+## [v3.2.0 (2021-01-06)](https://github.com/laravel/ui/compare/v3.1.0...v3.2.0)
+
+### Changed
+- Tweak stubs for Mix 6 ([#193](https://github.com/laravel/ui/pull/193))
 
 
 ## [v3.1.0 (2020-11-03)](https://github.com/laravel/ui/compare/v3.0.0...v3.1.0)
