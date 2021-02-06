@@ -114,6 +114,19 @@ trait ResetsPasswords
         event(new PasswordReset($user));
 
         $this->guard()->login($user);
+        
+        $this->authenticated($user);
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated($user)
+    {
+        //
     }
 
     /**
