@@ -31,11 +31,12 @@ class Vue extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
+            '@vue/compiler-sfc' => '^3.0.5',
             'resolve-url-loader' => '^2.3.1',
             'sass' => '^1.20.1',
             'sass-loader' => '^8.0.0',
-            'vue' => '^2.5.17',
-            'vue-template-compiler' => '^2.6.10',
+            'vue' => '^3.0.5',
+            'vue-loader' => '^16.1.2',
         ] + Arr::except($packages, [
             '@babel/preset-react',
             'react',
