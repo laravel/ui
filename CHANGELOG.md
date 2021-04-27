@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v3.2.0...master)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.2.1...master)
+
+
+## [v3.2.1 (2021-04-27)](https://github.com/laravel/ui/compare/v3.2.0...v3.2.1)
+
+### Changed
+- Use trans helper instead of Lang Facade ([#201](https://github.com/laravel/ui/pull/201))
+- Update NPM dependencies ([#203](https://github.com/laravel/ui/pull/203))
 
 
 ## [v3.2.0 (2021-01-06)](https://github.com/laravel/ui/compare/v3.1.0...v3.2.0)
