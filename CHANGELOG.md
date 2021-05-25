@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v3.2.1...3.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.3.0...3.x)
+
+
+## [v3.3.0 (2021-05-25)](https://github.com/laravel/ui/compare/v3.2.1...v3.3.0)
+
+### Added
+- Use new Password::defaults() feature ([#204](https://github.com/laravel/ui/pull/204))
 
 
 ## [v3.2.1 (2021-04-27)](https://github.com/laravel/ui/compare/v3.2.0...v3.2.1)
