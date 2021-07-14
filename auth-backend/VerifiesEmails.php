@@ -12,6 +12,16 @@ trait VerifiesEmails
     use RedirectsUsers;
 
     /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    public function user(Request $request)
+    {
+        return $request->user();
+    }
+
+    /**
      * Show the email verification notice.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -19,7 +29,7 @@ trait VerifiesEmails
      */
     public function show(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
+        return $this->user($request)->hasVerifiedEmail()
                         ? redirect($this->redirectPath())
                         : view('auth.verify');
     }
@@ -34,22 +44,22 @@ trait VerifiesEmails
      */
     public function verify(Request $request)
     {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
+        if (! hash_equals((string) $request->route('id'), (string) $this->user($request)->getKey())) {
             throw new AuthorizationException;
         }
 
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        if (! hash_equals((string) $request->route('hash'), sha1($this->user($request)->getEmailForVerification()))) {
             throw new AuthorizationException;
         }
 
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($this->user($request)->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new JsonResponse([], 204)
                         : redirect($this->redirectPath());
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($this->user($request)->markEmailAsVerified()) {
+            event(new Verified($this->user($request)));
         }
 
         if ($response = $this->verified($request)) {
@@ -80,13 +90,13 @@ trait VerifiesEmails
      */
     public function resend(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($this->user($request)->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new JsonResponse([], 204)
                         : redirect($this->redirectPath());
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $this->user($request)->sendEmailVerificationNotification();
 
         return $request->wantsJson()
                     ? new JsonResponse([], 202)
