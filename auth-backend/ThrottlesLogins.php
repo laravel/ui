@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
@@ -50,13 +51,19 @@ trait ThrottlesLogins
         $seconds = $this->limiter()->availableIn(
             $this->throttleKey($request)
         );
-
-        throw ValidationException::withMessages([
+        $data = [
             $this->username() => [trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ])],
-        ])->status(Response::HTTP_TOO_MANY_REQUESTS);
+        ];
+        
+        if(! $request->wantsJson()) {
+            throw ValidationException::withMessages($data)
+                ->status(Response::HTTP_TOO_MANY_REQUESTS);
+        }
+        
+        return new JsonResponse($data, Response::HTTP_TOO_MANY_REQUESTS);
     }
 
     /**
