@@ -33,6 +33,7 @@ class Bootstrap extends Preset
             '@popperjs/core' => '^2.10.2',
             'sass' => '^1.32.11',
             'sass-loader' => '^11.0.1',
+            'resolve-url-loader' => '^4.0.0',
         ] + $packages;
     }
 
