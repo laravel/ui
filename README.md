@@ -20,7 +20,7 @@ Only the latest major version of Laravel UI receives bug fixes. The table below 
 |---- |----|
 | [1.x](https://github.com/laravel/ui/tree/1.x) | 5.8, 6.x |
 | [2.x](https://github.com/laravel/ui/tree/2.x) | 7.x |
-| [3.x](https://github.com/laravel/ui/tree/3.x) | 8.x |
+| [3.x](https://github.com/laravel/ui/tree/3.x) | 8.x, 9.x |
 
 ### Installation
 
