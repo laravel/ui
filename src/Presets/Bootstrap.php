@@ -66,6 +66,10 @@ class Bootstrap extends Preset
      */
     protected static function updateBootstrapping()
     {
+         if (!(new Filesystem)->exists(resource_path('js'))) {
+            (new Filesystem)->makeDirectory(resource_path('js'));
+        }
+        
         copy(__DIR__.'/bootstrap-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 }
