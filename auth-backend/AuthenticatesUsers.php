@@ -144,6 +144,7 @@ trait AuthenticatesUsers
     {
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
+            'password' => [trans('auth.failed')]
         ]);
     }
 
