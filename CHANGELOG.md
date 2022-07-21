@@ -1,6 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/ui/compare/v3.4.6...3.x)
+## [Unreleased](https://github.com/laravel/ui/compare/v3.4.6...master)
 
 ## [v3.4.6](https://github.com/laravel/ui/compare/v3.4.5...v3.4.6) - 2022-05-20
 

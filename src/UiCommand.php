@@ -41,11 +41,11 @@ class UiCommand extends Command
             throw new InvalidArgumentException('Invalid preset.');
         }
 
-        $this->{$this->argument('type')}();
-
         if ($this->option('auth')) {
             $this->call('ui:auth');
         }
+
+        $this->{$this->argument('type')}();
     }
 
     /**
