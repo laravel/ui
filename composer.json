@@ -25,6 +25,11 @@
             "Illuminate\\Foundation\\Auth\\": "auth-backend/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Laravel\\Ui\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "sort-packages": true
     },
