@@ -3,15 +3,9 @@
 namespace Laravel\Ui\Tests\AuthBackend;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Testing\TestResponse;
-use Illuminate\Validation\ValidationException;
-use Orchestra\Testbench\Factories\UserFactory;
 use Orchestra\Testbench\TestCase;
 
 class RegistersUsersTest extends TestCase
@@ -40,7 +34,7 @@ class RegistersUsersTest extends TestCase
             'HTTP_ACCEPT' => 'application/json',
         ]);
 
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->register($request);
         })->assertCreated();
 
