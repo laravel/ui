@@ -32,9 +32,9 @@ class React extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            '@vitejs/plugin-react' => '^2.0.0',
-            'react' => '^17.0.2',
-            'react-dom' => '^17.0.2',
+            "@vitejs/plugin-react" => "^2.2.0",
+            "react" => "^18.2.0",
+            "react-dom" => "^18.2.0",
         ] + Arr::except($packages, [
             '@vitejs/plugin-vue',
             'vue'
@@ -48,7 +48,7 @@ class React extends Preset
      */
     protected static function updateViteConfiguration()
     {
-        copy(__DIR__.'/react-stubs/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__ . '/react-stubs/vite.config.js', base_path('vite.config.js'));
     }
 
     /**
@@ -63,7 +63,7 @@ class React extends Preset
         );
 
         copy(
-            __DIR__.'/react-stubs/Example.jsx',
+            __DIR__ . '/react-stubs/Example.jsx',
             resource_path('js/components/Example.jsx')
         );
     }
@@ -75,7 +75,7 @@ class React extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/react-stubs/app.js', resource_path('js/app.js'));
+        copy(__DIR__ . '/react-stubs/app.js', resource_path('js/app.js'));
     }
 
     /**
@@ -87,13 +87,13 @@ class React extends Preset
     {
         $view = static::getViewPath('layouts/app.blade.php');
 
-        if (! file_exists($view)) {
+        if (!file_exists($view)) {
             return;
         }
 
         file_put_contents(
             $view,
-            str_replace('@vite(', '@viteReactRefresh'.PHP_EOL.'    @vite(', file_get_contents($view))
+            str_replace('@vite(', '@viteReactRefresh' . PHP_EOL . '    @vite(', file_get_contents($view))
         );
     }
 
