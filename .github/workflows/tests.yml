@@ -17,11 +17,10 @@ jobs:
       fail-fast: true
       matrix:
         php: ['8.0', 8.1, 8.2]
-        laravel: [9.x, 10.x]
-
+        laravel: [9, 10]
         exclude:
-          - php: "8.0"
-            laravel: 10.x
+          - php: '8.0'
+            laravel: 10
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
@@ -40,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-           composer require "illuminate/contracts=${{ matrix.laravel }}" --dev --no-update
+           composer require "illuminate/contracts=^${{ matrix.laravel }}" --dev --no-update
            composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
