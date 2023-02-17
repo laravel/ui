@@ -17,7 +17,8 @@
         "illuminate/validation": "^9.21|^10.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0|^8.0"
+        "orchestra/testbench": "^7.0|^8.0",
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "psr-4": {
