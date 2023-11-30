@@ -117,10 +117,20 @@ class AuthCommand extends Command
 
         if (file_exists($controller) && ! $this->option('force')) {
             if ($this->components->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
-                file_put_contents($controller, $this->compileControllerStub());
+                file_put_contents($controller, $this->compileControllerStub('HomeController'));
             }
         } else {
-            file_put_contents($controller, $this->compileControllerStub());
+            file_put_contents($controller, $this->compileControllerStub('HomeController'));
+        }
+
+        $baseController = app_path('Http/Controllers/Controller.php');
+
+        if (file_exists($baseController) && ! $this->option('force')) {
+            if ($this->components->confirm("The [Controller.php] file already exists. Do you want to replace it?")) {
+                file_put_contents($baseController, $this->compileControllerStub('Controller'));
+            }
+        } else {
+            file_put_contents($baseController, $this->compileControllerStub('Controller'));
         }
 
         file_put_contents(
@@ -138,14 +148,15 @@ class AuthCommand extends Command
     /**
      * Compiles the "HomeController" stub.
      *
+     * @param  string  $stub
      * @return string
      */
-    protected function compileControllerStub()
+    protected function compileControllerStub($stub)
     {
         return str_replace(
             '{{namespace}}',
             $this->laravel->getNamespace(),
-            file_get_contents(__DIR__.'/Auth/stubs/controllers/HomeController.stub')
+            file_get_contents(__DIR__.'/Auth/stubs/controllers/'.$stub.'.stub')
         );
     }
 
