@@ -159,7 +159,7 @@ class AuthCommand extends Command
     }
 
     /**
-     * Compiles the "HomeController" stub.
+     * Compiles the given stub.
      *
      * @param  string  $stub
      * @return string
