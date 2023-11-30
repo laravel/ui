@@ -20,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RedirectIfAuthenticated::redirectUsing(fn () => '/');
+        RedirectIfAuthenticated::redirectUsing(fn () => '/home');
     }
 }
