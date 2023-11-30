@@ -117,20 +117,20 @@ class AuthCommand extends Command
 
         if (file_exists($controller) && ! $this->option('force')) {
             if ($this->components->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
-                file_put_contents($controller, $this->compileControllerStub('HomeController'));
+                file_put_contents($controller, $this->compileControllerStub('HomeController.php'));
             }
         } else {
-            file_put_contents($controller, $this->compileControllerStub('HomeController'));
+            file_put_contents($controller, $this->compileControllerStub('HomeController.php'));
         }
 
         $baseController = app_path('Http/Controllers/Controller.php');
 
         if (file_exists($baseController) && ! $this->option('force')) {
             if ($this->components->confirm("The [Controller.php] file already exists. Do you want to replace it?")) {
-                file_put_contents($baseController, $this->compileControllerStub('Controller'));
+                file_put_contents($baseController, $this->compileControllerStub('Controller.php'));
             }
         } else {
-            file_put_contents($baseController, $this->compileControllerStub('Controller'));
+            file_put_contents($baseController, $this->compileControllerStub('Controller.php'));
         }
 
         file_put_contents(
