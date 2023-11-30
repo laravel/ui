@@ -144,17 +144,17 @@ class AuthCommand extends Command
             } else {
                 file_put_contents($appProvider, $this->compileStub('providers/AppServiceProvider'));
             }
+        } else {
+            copy(
+                __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
+                base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
+            );
         }
 
         file_put_contents(
             base_path('routes/web.php'),
             file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
             FILE_APPEND
-        );
-
-        copy(
-            __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
-            base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
         );
     }
 
