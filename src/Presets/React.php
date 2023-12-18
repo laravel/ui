@@ -32,7 +32,7 @@ class React extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            '@vitejs/plugin-react' => '^2.2.0',
+            '@vitejs/plugin-react' => '^4.2.0',
             'react' => '^18.2.0',
             'react-dom' => '^18.2.0',
         ] + Arr::except($packages, [
