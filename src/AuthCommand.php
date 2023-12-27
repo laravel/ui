@@ -133,18 +133,7 @@ class AuthCommand extends Command
             file_put_contents($baseController, $this->compileStub('controllers/Controller'));
         }
 
-        if (class_exists('Illuminate\Auth\Middleware\RedirectIfAuthenticated')
-            && method_exists('Illuminate\Auth\Middleware\RedirectIfAuthenticated', 'redirectUsing')) {
-            $appProvider = app_path('Providers/AppServiceProvider.php');
-
-            if (file_exists($appProvider) && ! $this->option('force')) {
-                if ($this->components->confirm("The [AppServiceProvider.php] file already exists. Do you want to replace it?")) {
-                    file_put_contents($appProvider, $this->compileStub('providers/AppServiceProvider'));
-                }
-            } else {
-                file_put_contents($appProvider, $this->compileStub('providers/AppServiceProvider'));
-            }
-        } else {
+        if (! file_exists(database_path('migrations/0001_01_01_000000_create_users_table.php'))) {
             copy(
                 __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
                 base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
