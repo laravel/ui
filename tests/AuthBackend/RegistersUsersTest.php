@@ -13,6 +13,7 @@ use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
 use Orchestra\Testbench\Factories\UserFactory;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RegistersUsersTest extends TestCase
 {
@@ -28,7 +29,7 @@ class RegistersUsersTest extends TestCase
         $this->loadLaravelMigrations();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_register_a_user()
     {
         $request = Request::create('/register', 'POST', [

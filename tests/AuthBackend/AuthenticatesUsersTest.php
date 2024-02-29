@@ -12,6 +12,7 @@ use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
 use Orchestra\Testbench\Factories\UserFactory;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AuthenticatesUsersTest extends TestCase
 {
@@ -34,7 +35,7 @@ class AuthenticatesUsersTest extends TestCase
         $this->loadLaravelMigrations();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_authenticate_a_user()
     {
         Event::fake();
@@ -57,7 +58,7 @@ class AuthenticatesUsersTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_authenticate_a_user_with_remember_as_false()
     {
         Event::fake();
@@ -81,9 +82,7 @@ class AuthenticatesUsersTest extends TestCase
         });
     }
 
-
-
-    /** @test */
+    #[Test]
     public function it_can_authenticate_a_user_with_remember_as_true()
     {
         Event::fake();
@@ -107,7 +106,7 @@ class AuthenticatesUsersTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_cant_authenticate_a_user_with_invalid_password()
     {
         $user = UserFactory::new()->create();
@@ -131,7 +130,7 @@ class AuthenticatesUsersTest extends TestCase
         ], $response->exception->errors());
     }
 
-     /** @test */
+    #[Test]
     public function it_cant_authenticate_unknown_credential()
     {
         $request = Request::create('/login', 'POST', [
