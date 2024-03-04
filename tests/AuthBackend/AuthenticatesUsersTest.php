@@ -3,6 +3,7 @@
 namespace Laravel\Ui\Tests\AuthBackend;
 
 use Illuminate\Auth\Events\Attempting;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -28,16 +29,6 @@ class AuthenticatesUsersTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Define database migrations.
-     *
-     * @return void
-     */
-    protected function defineDatabaseMigrations()
-    {
-        $this->loadLaravelMigrations();
-    }
-
     #[Test]
     public function it_can_authenticate_a_user()
     {
@@ -59,6 +50,26 @@ class AuthenticatesUsersTest extends TestCase
         Event::assertDispatched(function (Attempting $event) {
             return $event->remember === false;
         });
+    }
+
+    #[Test]
+    public function it_can_deauthenticate_a_user()
+    {
+        Event::fake();
+
+        $user = UserFactory::new()->create();
+
+        $this->actingAs($user);
+
+        $request = Request::create('/logout', 'POST', [], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing(
+            $request, fn ($request) => $this->logout($request)
+        )->assertStatus(204);
+
+        Event::assertDispatched(fn (Logout $event) => $user->is($event->user));
     }
 
     #[Test]
