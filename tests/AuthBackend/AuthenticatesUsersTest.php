@@ -4,19 +4,22 @@ namespace Laravel\Ui\Tests\AuthBackend;
 
 use Illuminate\Auth\Events\Attempting;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
+use Orchestra\Testbench\Attributes\WithMigration;
 use Orchestra\Testbench\Factories\UserFactory;
 use Orchestra\Testbench\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
+#[WithMigration]
 class AuthenticatesUsersTest extends TestCase
 {
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, RefreshDatabase;
 
     protected function tearDown(): void
     {
