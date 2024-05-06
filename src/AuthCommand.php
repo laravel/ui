@@ -38,7 +38,7 @@ class AuthCommand extends Command
         'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
         'auth/register.stub' => 'auth/register.blade.php',
         'auth/verify.stub' => 'auth/verify.blade.php',
-        'home.stub' => 'home.blade.php',
+        'dashboard.stub' => 'dashboard.blade.php',
         'layouts/app.stub' => 'layouts/app.blade.php',
     ];
 
@@ -114,16 +114,6 @@ class AuthCommand extends Command
     protected function exportBackend()
     {
         $this->callSilent('ui:controllers');
-
-        $controller = app_path('Http/Controllers/HomeController.php');
-
-        if (file_exists($controller) && ! $this->option('force')) {
-            if ($this->components->confirm("The [HomeController.php] file already exists. Do you want to replace it?", true)) {
-                file_put_contents($controller, $this->compileStub('controllers/HomeController'));
-            }
-        } else {
-            file_put_contents($controller, $this->compileStub('controllers/HomeController'));
-        }
 
         $baseController = app_path('Http/Controllers/Controller.php');
 

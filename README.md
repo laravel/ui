@@ -100,7 +100,7 @@ import ExampleComponent from './components/ExampleComponent.vue';
 Vue.component('example-component', ExampleComponent);
 ```
 
-To use the component in your application, you may drop it into one of your HTML templates. For example, after running the `php artisan ui vue --auth` Artisan command to scaffold your application's authentication and registration screens, you could drop the component into the `home.blade.php` Blade template:
+To use the component in your application, you may drop it into one of your HTML templates. For example, after running the `php artisan ui vue --auth` Artisan command to scaffold your application's authentication and registration screens, you could drop the component into the `dashboard.blade.php` Blade template:
 
 ```blade
 @extends('layouts.app')

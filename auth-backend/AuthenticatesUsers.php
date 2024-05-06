@@ -29,6 +29,7 @@ trait AuthenticatesUsers
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    
     public function login(Request $request)
     {
         $this->validateLogin($request);
