@@ -13,7 +13,8 @@ class AuthRouteMethods
     public function auth()
     {
         return function ($options = []) {
-            $namespace = class_exists($this->prependGroupNamespace('Auth\LoginController')) ? null : 'App\Http\Controllers';
+            $namespace = $options['namespace'] ??
+                (class_exists($this->prependGroupNamespace('Auth\LoginController')) ? null : 'App\Http\Controllers');
 
             $this->group(['namespace' => $namespace], function() use($options) {
                 // Login Routes...
