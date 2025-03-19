@@ -95,7 +95,7 @@ trait VerifiesEmails
     }
 
     /**
-     * Get the guard to be used during authentication.
+     * Get the guard to be used during verification.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
