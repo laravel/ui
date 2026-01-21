@@ -160,3 +160,17 @@ Please review [our security policy](https://github.com/laravel/ui/security/polic
 ## License
 
 Laravel UI is open-sourced software licensed under the [MIT license](LICENSE.md).
+
+#=================================================================================================================================================================
+# For laravel 9/10/11, When you already do this composer require laravel/ui, php artisan ui bootstrap --auth and npm install
+# Exactly we have to run command: php artisan serve and npm run dev together to can process your laravel project without an error about @vite
+# I bad feel when I run two commands together, so I've installed one command is : npm install concurrently --save-dev and then configure in package.json as below:
+"scripts": {
+    "dev": "vite",
+    "serve": "php artisan serve",
+    "start": "concurrently \"php artisan serve\" \"npm run dev\""
+}
+# Therefore we can run using only command : npm run start
+Made by: Mr. Keo Oudom
+#===================================================================================================================================================================
+
