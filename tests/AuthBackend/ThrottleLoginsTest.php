@@ -14,7 +14,7 @@ class ThrottleLoginsTest extends TestCase
     #[DataProvider('emailProvider')]
     public function it_can_generate_throttle_key(string $email, string $expectedEmail): void
     {
-        $throttle = $this->createMock(ThrottlesLogins::class);
+        $throttle = $this->createStub(ThrottlesLogins::class);
         $throttle->method('username')->willReturn('email');
         $reflection = new \ReflectionClass($throttle);
         $method = $reflection->getMethod('throttleKey');

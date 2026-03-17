@@ -18,8 +18,8 @@
         "symfony/console": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.35|^8.15|^9.0|^10.0",
-        "phpunit/phpunit": "^9.3|^10.4|^11.5|^12.5"
+        "orchestra/testbench": "^7.35|^8.15|^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^9.3|^10.4|^11.5|^12.5|^13.0"
     },
     "autoload": {
         "psr-4": {
