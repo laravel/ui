@@ -18,7 +18,9 @@ class ThrottleLoginsTest extends TestCase
         $throttle->method('username')->willReturn('email');
         $reflection = new \ReflectionClass($throttle);
         $method = $reflection->getMethod('throttleKey');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $request = $this->mock(Request::class);
         $request->expects('input')->with('email')->andReturn($email);
