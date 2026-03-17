@@ -18,6 +18,7 @@ class ThrottleLoginsTest extends TestCase
         $throttle->method('username')->willReturn('email');
         $reflection = new \ReflectionClass($throttle);
         $method = $reflection->getMethod('throttleKey');
+
         if (PHP_VERSION_ID < 80100) {
             $method->setAccessible(true);
         }
