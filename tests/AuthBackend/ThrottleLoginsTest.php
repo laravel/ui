@@ -19,10 +19,6 @@ class ThrottleLoginsTest extends TestCase
         $reflection = new \ReflectionClass($throttle);
         $method = $reflection->getMethod('throttleKey');
 
-        if (PHP_VERSION_ID < 80100) {
-            $method->setAccessible(true);
-        }
-
         $request = $this->mock(Request::class);
         $request->expects('input')->with('email')->andReturn($email);
         $request->expects('ip')->andReturn('192.168.0.1');
